@@ -9,7 +9,11 @@ ort.env.wasm.wasmPaths = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/di
 ort.env.wasm.numThreads = 1; // GitHub Pages is not cross-origin isolated, so no wasm threads
 
 const $ = (id) => document.getElementById(id);
-const HISTORY = 60; // live predictions kept in the chart (one per second)
+// A shot's score depends on where it falls inside the 4 s window, so the window slides in small steps:
+// on recorded test clips, 0.25 s steps caught 13 of 27 played-back gunshots at the tuned line vs 10 with 1 s steps.
+const STEP_SECONDS = 0.25;
+const PER_SECOND = Math.round(1 / STEP_SECONDS);
+const HISTORY = 60 * PER_SECOND; // live predictions kept in the chart (the last 60 s)
 const SAVE_SECONDS = 8; // audio kept for "save for training": the 4 s window plus time to click
 const CLIP_LEVEL = 0.99; // |sample| at or above this = the microphone is overloaded (clipping)
 const THRESHOLD_KEY = 'shotshield.threshold';
@@ -198,7 +202,8 @@ function onAudio(chunk) {
     $('fill').textContent = `${(L.ring.filled / S.cfg.sampleRate).toFixed(1)} / 4.0 s`;
     return;
   }
-  if (L.sinceLast >= S.cfg.sampleRate && !L.busy) { // one prediction per second of new audio
+  // one prediction per step of new audio; on a slow device a step is skipped while the previous one is still running
+  if (L.sinceLast >= STEP_SECONDS * S.cfg.sampleRate && !L.busy) {
     L.sinceLast = 0;
     L.busy = true;
     liveStep(L.ring.latest(S.logmel.nSamples)).finally(() => { L.busy = false; });
@@ -215,7 +220,7 @@ async function liveStep(window) {
   if (!L.started) {
     L.started = true;
     setStatus(`Listening — microphone at ${L.ctx.sampleRate.toLocaleString()} Hz, resampled to ` +
-      `${S.cfg.sampleRate.toLocaleString()} Hz. One prediction per second.`);
+      `${S.cfg.sampleRate.toLocaleString()} Hz. ${PER_SECOND} predictions per second.`);
   }
   $('fill').textContent = `features ${Math.round(tFeat)} ms · model ${Math.round(ms)} ms`;
   drawSpectrogram($('spec'), feats);
@@ -268,7 +273,7 @@ async function saveLive(labelName, auto = false) {
   const rate = S.cfg.sampleRate;
   const y = L.ring.latest(SAVE_SECONDS * rate);
   if (y.length < rate) { flashSaved('Nothing to save yet: wait a second after starting.'); return; }
-  const recent = L.history.slice(-SAVE_SECONDS);
+  const recent = L.history.slice(-SAVE_SECONDS * PER_SECOND);
   const meta = {
     time: new Date().toISOString(),
     label: labelName,
@@ -562,10 +567,11 @@ function drawHistory(history) {
   g.scale(dpr, dpr);
   const css = getComputedStyle(document.documentElement);
   const bw = w / HISTORY;
+  const gap = bw > 4 ? 1 : 0; // narrow bars touch, so the chart reads as a continuous curve
   history.forEach((p, i) => {
     const x = w - (history.length - i) * bw;
     g.fillStyle = p >= S.threshold ? css.getPropertyValue('--alert') : css.getPropertyValue('--bar');
-    g.fillRect(x + 1, h - p * h, Math.max(1, bw - 2), p * h);
+    g.fillRect(x + gap, h - p * h, Math.max(0.5, bw - 2 * gap), p * h);
   });
   const ty = h - S.threshold * h;
   g.strokeStyle = css.getPropertyValue('--muted');
