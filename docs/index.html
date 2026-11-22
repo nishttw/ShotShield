@@ -58,8 +58,9 @@
 
     <section class="card" id="examples-section">
       <h2>Try a recording</h2>
-      <p class="muted">Clips from UrbanSound8K's test fold 10, which the model never saw in training. They were picked
-        at random, except the last one: the non-gunshot the model finds most gunshot-like. Click one to play and analyse it.</p>
+      <p class="muted">Test clips the model never saw in training, picked at random: city sounds from UrbanSound8K
+        (fold 10) and household and impulsive sounds from FSD50K's evaluation set. These include the kinds of sound that
+        fooled the previous version. Click one to play and analyse it.</p>
       <div id="examples" class="examples"></div>
       <label class="upload">or analyse your own file <input type="file" id="file" accept="audio/*" disabled></label>
 
@@ -91,8 +92,11 @@
         <li>A convolutional network (304,289 parameters, converted from Keras to ONNX) runs on it with
           <a href="https://onnxruntime.ai/">ONNX Runtime Web</a> and outputs P(gunshot).</li>
       </ol>
-      <p>Trained on <a href="https://urbansounddataset.weebly.com/urbansound8k.html">UrbanSound8K</a>: gunshots against
-        nine other city sounds. 10-fold cross-validation F1 0.88 ± 0.09. Details, code and error analysis are on
+      <p>Model v3 learned from 803 gunshots and about 18,800 other sounds (part of them held back for testing) from
+        <a href="https://urbansounddataset.weebly.com/urbansound8k.html">UrbanSound8K</a>,
+        <a href="https://github.com/karolpiczak/ESC-50">ESC-50</a> and <a href="https://zenodo.org/records/4060432">FSD50K</a>,
+        including finger snaps, claps, knocks, door slams, typing and fans. On 2,729 test sounds it never saw, it raises
+        false alarms on 2.6% (the previous version: 21.7%). Details, code and error analysis are on
         <a href="https://github.com/nishttw/ShotShield">GitHub</a>.</p>
       <details>
         <summary>Check this browser against Python</summary>
@@ -107,8 +111,10 @@
       <h2>Limitations</h2>
       <ul>
         <li><b>Research demo, not a safety system.</b> Don't rely on it to detect real gunfire.</li>
-        <li>It was trained on 374 gunshot clips. Fireworks, door slams and other sharp bangs were not in the training
-          data and will often fool it, and so can steady machine noise.</li>
+        <li><b>Fireworks and explosions still fool it</b> (about 1 in 3 test clips), and so can hammering. They really
+          are acoustically close to gunfire.</li>
+        <li>It misses about 40% of gunshots from recordings unlike its training data. Gunshots recorded with other guns,
+          at other distances or on other equipment are harder.</li>
         <li>A laptop or phone microphone, a speaker or room echo changes the sound. Expect more mistakes than in the
           published results.</li>
       </ul>
@@ -116,7 +122,8 @@
   </main>
 
   <footer class="wrap">
-    <p>Example audio: UrbanSound8K by J. Salamon, C. Jacoby and J. P. Bello (CC BY-NC 3.0), originally from
+    <p>Example audio: UrbanSound8K by J. Salamon, C. Jacoby and J. P. Bello (CC BY-NC 3.0) and FSD50K by E. Fonseca
+      et al. (per-clip Creative Commons licenses, credited with each clip), originally from
       <a href="https://freesound.org">freesound.org</a>. The model is for non-commercial use.
       Code: MIT · <a href="https://github.com/nishttw/ShotShield">github.com/nishttw/ShotShield</a></p>
   </footer>

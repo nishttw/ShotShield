@@ -31,7 +31,8 @@ def main() -> int:
 
     info = json.loads((ROOT / "docs" / "model" / "model_info.json").read_text())
     threshold = info["threshold"]
-    sess = ort.InferenceSession(str(ROOT / "docs" / "model" / "shotshield_v2.onnx"), providers=["CPUExecutionProvider"])
+    model_path = ROOT / "docs" / "model" / info["web"]["onnx_file"]
+    sess = ort.InferenceSession(str(model_path), providers=["CPUExecutionProvider"])
     inp = sess.get_inputs()[0]
     npz = np.load(args.reference, allow_pickle=False)
     names = [k[5:] for k in npz.files if k.startswith("wave/")]
@@ -40,7 +41,7 @@ def main() -> int:
     def onnx_prob(feats):  # feats (n_windows, 128, 173) -> (n_windows,)
         return np.array([sess.run(None, {inp.name: f[None, :, :, None].astype(np.float32)})[0].ravel()[0] for f in feats])
 
-    print(f"ONNX input {inp.name} {inp.shape}; threshold {threshold:.3f}\n")
+    print(f"ShotShield {info.get('version')} ({model_path.name}), ONNX input {inp.name} {inp.shape}; threshold {threshold:.3f}\n")
     print(f"{'signal':34s} {'win':>3s} {'Keras':>7s} {'browser':>8s} {'|diff| py-feat':>14s} {'|diff| js-feat':>14s}  result")
     worst, ok_all = 0.0, True
     for n in names:

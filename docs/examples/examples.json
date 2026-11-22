@@ -1,159 +1,340 @@
 {
-  "dataset": "UrbanSound8K (J. Salamon, C. Jacoby, J. P. Bello, 2014), CC BY-NC 3.0; clips originally from freesound.org",
-  "threshold": 0.2513888478279114,
+  "description": "UrbanSound8K test fold 10 (CC BY-NC 3.0) and FSD50K eval set (per-clip Creative Commons licenses); clips originally from freesound.org",
+  "threshold": 0.8788650631904602,
   "examples": [
     {
-      "name": "gun_shot_157207_6-10-0",
-      "file": "examples/gun_shot_157207_6-10-0.wav",
+      "name": "gun_shot_157207-6-10-0",
+      "file": "examples/gun_shot_157207-6-10-0.wav",
       "class": "gun_shot",
       "is_gunshot": true,
       "duration": 1.969,
-      "fold": 10,
+      "dataset": "us8k",
       "slice_file_name": "157207-6-10-0.wav",
       "fsID": 157207,
       "source": "https://freesound.org/s/157207/",
+      "fold": 10,
       "note": null,
       "keras_window_probs": [
-        0.999779
+        0.996683
       ],
-      "keras_max_prob": 0.999779,
+      "keras_max_prob": 0.996683,
       "keras_detected": true
     },
     {
-      "name": "gun_shot_200460_6-4-0",
-      "file": "examples/gun_shot_200460_6-4-0.wav",
+      "name": "gun_shot_200460-6-4-0",
+      "file": "examples/gun_shot_200460-6-4-0.wav",
       "class": "gun_shot",
       "is_gunshot": true,
       "duration": 0.857,
-      "fold": 10,
+      "dataset": "us8k",
       "slice_file_name": "200460-6-4-0.wav",
       "fsID": 200460,
       "source": "https://freesound.org/s/200460/",
+      "fold": 10,
       "note": null,
       "keras_window_probs": [
-        0.999634
+        0.999541
       ],
-      "keras_max_prob": 0.999634,
+      "keras_max_prob": 0.999541,
       "keras_detected": true
     },
     {
-      "name": "dog_bark_209672_3-0-0",
-      "file": "examples/dog_bark_209672_3-0-0.wav",
+      "name": "dog_bark_209672-3-0-0",
+      "file": "examples/dog_bark_209672-3-0-0.wav",
       "class": "dog_bark",
       "is_gunshot": false,
       "duration": 1.52,
-      "fold": 10,
+      "dataset": "us8k",
       "slice_file_name": "209672-3-0-0.wav",
       "fsID": 209672,
       "source": "https://freesound.org/s/209672/",
+      "fold": 10,
       "note": null,
       "keras_window_probs": [
-        0.002463
+        3e-06
       ],
-      "keras_max_prob": 0.002463,
+      "keras_max_prob": 3e-06,
       "keras_detected": false
     },
     {
-      "name": "siren_74364_8-1-4",
-      "file": "examples/siren_74364_8-1-4.wav",
+      "name": "siren_74364-8-1-4",
+      "file": "examples/siren_74364-8-1-4.wav",
       "class": "siren",
       "is_gunshot": false,
       "duration": 4.0,
-      "fold": 10,
+      "dataset": "us8k",
       "slice_file_name": "74364-8-1-4.wav",
       "fsID": 74364,
       "source": "https://freesound.org/s/74364/",
+      "fold": 10,
       "note": null,
       "keras_window_probs": [
-        1e-06
+        0.001365
       ],
-      "keras_max_prob": 1e-06,
+      "keras_max_prob": 0.001365,
       "keras_detected": false
     },
     {
-      "name": "drilling_180127_4-0-3",
-      "file": "examples/drilling_180127_4-0-3.wav",
+      "name": "drilling_180127-4-0-3",
+      "file": "examples/drilling_180127-4-0-3.wav",
       "class": "drilling",
       "is_gunshot": false,
       "duration": 4.0,
-      "fold": 10,
+      "dataset": "us8k",
       "slice_file_name": "180127-4-0-3.wav",
       "fsID": 180127,
       "source": "https://freesound.org/s/180127/",
+      "fold": 10,
       "note": null,
       "keras_window_probs": [
-        7.3e-05
+        2.7e-05
       ],
-      "keras_max_prob": 7.3e-05,
+      "keras_max_prob": 2.7e-05,
       "keras_detected": false
     },
     {
-      "name": "jackhammer_162134_7-12-4",
-      "file": "examples/jackhammer_162134_7-12-4.wav",
+      "name": "jackhammer_162134-7-12-4",
+      "file": "examples/jackhammer_162134-7-12-4.wav",
       "class": "jackhammer",
       "is_gunshot": false,
       "duration": 4.0,
-      "fold": 10,
+      "dataset": "us8k",
       "slice_file_name": "162134-7-12-4.wav",
       "fsID": 162134,
       "source": "https://freesound.org/s/162134/",
+      "fold": 10,
       "note": null,
       "keras_window_probs": [
-        8e-06
+        0.52524
+      ],
+      "keras_max_prob": 0.52524,
+      "keras_detected": false
+    },
+    {
+      "name": "air_conditioner_189982-0-0-27",
+      "file": "examples/air_conditioner_189982-0-0-27.wav",
+      "class": "air_conditioner",
+      "is_gunshot": false,
+      "duration": 4.0,
+      "dataset": "us8k",
+      "slice_file_name": "189982-0-0-27.wav",
+      "fsID": 189982,
+      "source": "https://freesound.org/s/189982/",
+      "fold": 10,
+      "note": null,
+      "keras_window_probs": [
+        0.00793
+      ],
+      "keras_max_prob": 0.00793,
+      "keras_detected": false
+    },
+    {
+      "name": "car_horn_100648-1-2-0",
+      "file": "examples/car_horn_100648-1-2-0.wav",
+      "class": "car_horn",
+      "is_gunshot": false,
+      "duration": 0.405,
+      "dataset": "us8k",
+      "slice_file_name": "100648-1-2-0.wav",
+      "fsID": 100648,
+      "source": "https://freesound.org/s/100648/",
+      "fold": 10,
+      "note": null,
+      "keras_window_probs": [
+        0.029146
+      ],
+      "keras_max_prob": 0.029146,
+      "keras_detected": false
+    },
+    {
+      "name": "Finger_snapping_387082",
+      "file": "examples/Finger_snapping_387082.wav",
+      "class": "finger_snapping",
+      "is_gunshot": false,
+      "duration": 1.038,
+      "dataset": "fsd50k",
+      "slice_file_name": "387082.wav",
+      "fsID": 387082,
+      "source": "https://freesound.org/s/387082/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "Finger snap (recording)",
+        "uploader": "TKhelkar",
+        "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "keras_window_probs": [
+        0.543262
+      ],
+      "keras_max_prob": 0.543262,
+      "keras_detected": false
+    },
+    {
+      "name": "Clapping_391282",
+      "file": "examples/Clapping_391282.wav",
+      "class": "clapping",
+      "is_gunshot": false,
+      "duration": 4.011,
+      "dataset": "fsd50k",
+      "slice_file_name": "391282.wav",
+      "fsID": 391282,
+      "source": "https://freesound.org/s/391282/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "Claping",
+        "uploader": "Igor1998",
+        "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "keras_window_probs": [
+        0.716854,
+        0.792932
+      ],
+      "keras_max_prob": 0.792932,
+      "keras_detected": false
+    },
+    {
+      "name": "Knock_430844",
+      "file": "examples/Knock_430844.wav",
+      "class": "knock",
+      "is_gunshot": false,
+      "duration": 2.56,
+      "dataset": "fsd50k",
+      "slice_file_name": "430844.wav",
+      "fsID": 430844,
+      "source": "https://freesound.org/s/430844/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "PROF. VIKTOR - GRUPO 2 - BATENDO NA PORTA.wav",
+        "uploader": "GrupoViktor",
+        "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "keras_window_probs": [
+        0.002148
+      ],
+      "keras_max_prob": 0.002148,
+      "keras_detected": false
+    },
+    {
+      "name": "Slam_330395",
+      "file": "examples/Slam_330395.wav",
+      "class": "slam",
+      "is_gunshot": false,
+      "duration": 1.375,
+      "dataset": "fsd50k",
+      "slice_file_name": "330395.wav",
+      "fsID": 330395,
+      "source": "https://freesound.org/s/330395/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "Wooden Entrance Door Close Slam",
+        "uploader": "dav0r",
+        "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
+      "keras_window_probs": [
+        0.455327
+      ],
+      "keras_max_prob": 0.455327,
+      "keras_detected": false
+    },
+    {
+      "name": "Dishes_and_pots_and_pans_38957",
+      "file": "examples/Dishes_and_pots_and_pans_38957.wav",
+      "class": "dishes_and_pots_and_pans",
+      "is_gunshot": false,
+      "duration": 5.942,
+      "dataset": "fsd50k",
+      "slice_file_name": "38957.wav",
+      "fsID": 38957,
+      "source": "https://freesound.org/s/38957/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "spoon in cup.wav",
+        "uploader": "Wolfsinger",
+        "license": "http://creativecommons.org/licenses/by/3.0/"
+      },
+      "keras_window_probs": [
+        8e-06,
+        1e-06,
+        6e-06
       ],
       "keras_max_prob": 8e-06,
       "keras_detected": false
     },
     {
-      "name": "air_conditioner_189982_0-0-27",
-      "file": "examples/air_conditioner_189982_0-0-27.wav",
-      "class": "air_conditioner",
+      "name": "Typing_411014",
+      "file": "examples/Typing_411014.wav",
+      "class": "typing",
       "is_gunshot": false,
-      "duration": 4.0,
-      "fold": 10,
-      "slice_file_name": "189982-0-0-27.wav",
-      "fsID": 189982,
-      "source": "https://freesound.org/s/189982/",
-      "note": null,
+      "duration": 3.629,
+      "dataset": "fsd50k",
+      "slice_file_name": "411014.wav",
+      "fsID": 411014,
+      "source": "https://freesound.org/s/411014/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "keyboard typing.mp3",
+        "uploader": "krismar1230",
+        "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
       "keras_window_probs": [
-        0.003242
+        0.025505
       ],
-      "keras_max_prob": 0.003242,
+      "keras_max_prob": 0.025505,
       "keras_detected": false
     },
     {
-      "name": "car_horn_100648_1-2-0",
-      "file": "examples/car_horn_100648_1-2-0.wav",
-      "class": "car_horn",
+      "name": "Fireworks_132900",
+      "file": "examples/Fireworks_132900.wav",
+      "class": "fireworks",
       "is_gunshot": false,
-      "duration": 0.405,
-      "fold": 10,
-      "slice_file_name": "100648-1-2-0.wav",
-      "fsID": 100648,
-      "source": "https://freesound.org/s/100648/",
-      "note": null,
+      "duration": 5.433,
+      "dataset": "fsd50k",
+      "slice_file_name": "132900.wav",
+      "fsID": 132900,
+      "source": "https://freesound.org/s/132900/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "Fireworks.mp3",
+        "uploader": "Alvinwhatup2",
+        "license": "http://creativecommons.org/publicdomain/zero/1.0/"
+      },
       "keras_window_probs": [
-        1e-06
+        0.77911,
+        0.915074,
+        0.910829
       ],
-      "keras_max_prob": 1e-06,
-      "keras_detected": false
-    },
-    {
-      "name": "dog_bark_142641_3-0-0",
-      "file": "examples/dog_bark_142641_3-0-0.wav",
-      "class": "dog_bark",
-      "is_gunshot": false,
-      "duration": 0.38,
-      "fold": 10,
-      "slice_file_name": "142641-3-0-0.wav",
-      "fsID": 142641,
-      "source": "https://freesound.org/s/142641/",
-      "note": "the non-gunshot clip in test fold 10 the model scores highest",
-      "keras_window_probs": [
-        0.629034
-      ],
-      "keras_max_prob": 0.629034,
+      "keras_max_prob": 0.915074,
       "keras_detected": true
+    },
+    {
+      "name": "Mechanical_fan_174919",
+      "file": "examples/Mechanical_fan_174919.wav",
+      "class": "mechanical_fan",
+      "is_gunshot": false,
+      "duration": 4.342,
+      "dataset": "fsd50k",
+      "slice_file_name": "174919.wav",
+      "fsID": 174919,
+      "source": "https://freesound.org/s/174919/",
+      "fold": null,
+      "note": "FSD50K eval set (never trained on)",
+      "credit": {
+        "title": "fan sound",
+        "uploader": "ibm5155",
+        "license": "http://creativecommons.org/licenses/by/3.0/"
+      },
+      "keras_window_probs": [
+        0.003179,
+        0.00612
+      ],
+      "keras_max_prob": 0.00612,
+      "keras_detected": false
     }
   ]
 }

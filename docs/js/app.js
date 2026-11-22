@@ -230,7 +230,8 @@ async function loadExamples() {
     const b = document.createElement('button');
     b.className = 'example' + (ex.is_gunshot ? ' gun' : '');
     b.innerHTML = `<span class="tag">${ex.is_gunshot ? 'gunshot' : 'not a gunshot'}</span>
-      <b>${label(ex.class)}</b><small>${ex.duration.toFixed(1)} s${ex.note ? ' · hardest negative' : ''}</small>`;
+      <b>${label(ex.class)}</b><small>${ex.duration.toFixed(1)} s${ex.dataset === 'fsd50k' ? ' · FSD50K'
+        : ex.note ? ' · hardest negative' : ''}</small>`;
     b.title = ex.note ?? `UrbanSound8K ${ex.slice_file_name} (test fold ${ex.fold})`;
     b.onclick = () => runClip(`${capitalize(label(ex.class))} — ${ex.slice_file_name}`, ex.file, ex);
     grid.append(b);
@@ -270,6 +271,20 @@ async function runClip(title, url, ex = null) {
       const diff = Math.max(...probs.map((p, i) => Math.abs(p - ex.keras_window_probs[i])));
       $('clip-ref').textContent = `Ground truth: ${label(ex.class)}. The Python/Keras model gave ${pct(ex.keras_max_prob)} ` +
         `for this clip; this browser got ${pct(max)} (largest difference ${diff.toExponential(1)}).`;
+      if (ex.credit) {
+        const c = ex.credit;
+        const credit = document.createElement('span');
+        credit.append(` Sound: “${c.title ?? ex.slice_file_name}” by ${c.uploader ?? 'unknown'} (`);
+        const a = document.createElement('a');
+        a.href = c.license ?? '#';
+        a.textContent = 'license';
+        credit.append(a, ', ');
+        const src = document.createElement('a');
+        src.href = ex.source;
+        src.textContent = 'freesound.org';
+        credit.append(src, ').');
+        $('clip-ref').append(credit);
+      }
     }
   } catch (err) {
     console.error(err);

@@ -2,7 +2,7 @@
 
     python tools/install_web_bundle.py path/to/shotshield_v2_web.zip
 
-  shotshield_v2.onnx, model_info.json -> docs/model/
+  <model>.onnx, model_info.json       -> docs/model/   (older .onnx files there are removed)
   examples/*.wav, examples.json       -> docs/examples/
   reference.npz                       -> tools/reference/   (kept out of git)
 
@@ -18,8 +18,8 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+MODEL_DIR = ROOT / "docs" / "model"
 TARGETS = {
-    "shotshield_v2.onnx": ROOT / "docs" / "model" / "shotshield_v2.onnx",
     "model_info.json": ROOT / "docs" / "model" / "model_info.json",
     "examples/examples.json": ROOT / "docs" / "examples" / "examples.json",
     "reference.npz": ROOT / "tools" / "reference" / "reference.npz",
@@ -30,17 +30,22 @@ EXAMPLE_WAV = re.compile(r"^examples/[A-Za-z0-9_.-]+\.wav$")
 def main(zip_path: str) -> None:
     with zipfile.ZipFile(zip_path) as z:
         names = set(z.namelist())
-        missing = [n for n in ("shotshield_v2.onnx", "model_info.json") if n not in names]
-        if missing:
-            sys.exit(f"not a ShotShield web bundle, missing: {missing}")
+        if "model_info.json" not in names:
+            sys.exit("not a ShotShield web bundle: model_info.json missing")
         info = json.loads(z.read("model_info.json"))
-        onnx_bytes = z.read("shotshield_v2.onnx")
+        onnx_name = info["web"]["onnx_file"]
+        if not re.fullmatch(r"[A-Za-z0-9_.-]+\.onnx", onnx_name) or onnx_name not in names:
+            sys.exit(f"model file {onnx_name!r} missing from the bundle")
+        TARGETS[onnx_name] = MODEL_DIR / onnx_name
+        onnx_bytes = z.read(onnx_name)
         digest = hashlib.sha256(onnx_bytes).hexdigest()
         if digest != info["web"]["onnx_sha256"]:
             sys.exit("ONNX checksum does not match model_info.json — download the zip again")
-        old = ROOT / "docs" / "examples"
-        for f in old.glob("*.wav"):
+        for f in (ROOT / "docs" / "examples").glob("*.wav"):
             f.unlink()
+        for f in MODEL_DIR.glob("*.onnx"):
+            if f.name != onnx_name:
+                f.unlink()
         for name in sorted(names):
             dest = TARGETS.get(name) or (ROOT / "docs" / name if EXAMPLE_WAV.match(name) else None)
             if dest is None:
