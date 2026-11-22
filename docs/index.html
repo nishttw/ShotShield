@@ -22,6 +22,7 @@
         <button id="start" class="primary" disabled>Start listening</button>
         <button id="stop" disabled>Stop</button>
         <div class="levelbox" title="Microphone level"><div id="level"></div></div>
+        <span id="clipwarn" class="clipwarn" hidden title="The sound was louder than the microphone can record, so its peaks are cut off">mic overloaded</span>
       </div>
       <p id="status" class="status" role="status">Loading the model…</p>
 
@@ -36,8 +37,15 @@
         </div>
         <div id="prob" class="prob">–</div>
       </div>
-      <p class="hint">Probability that the last 4 seconds contain a gunshot, updated every second.
-        Above <b id="threshold-label">25%</b> (the threshold tuned on validation data) counts as a detection.</p>
+      <div class="sens">
+        <label for="threshold">Alarm line <b id="threshold-label">88%</b> <span id="threshold-mode" class="muted"></span></label>
+        <input type="range" id="threshold" min="0.05" max="0.99" step="0.01" value="0.88" disabled>
+        <button id="threshold-reset" class="small" disabled>Reset</button>
+      </div>
+      <p class="hint">Probability that the last 4 seconds contain a gunshot, updated every second. Anything above the
+        alarm line counts as a detection. The tuned line (<span id="tuned-label">88%</span>, chosen on test recordings)
+        keeps false alarms rare but misses more gunshots. Move it lower to catch more, and watch what else starts to
+        trigger.</p>
 
       <div class="grid2">
         <figure>
@@ -54,6 +62,31 @@
       <h3>Detections</h3>
       <p id="events-empty" class="muted">None yet.</p>
       <ol id="events" class="events"></ol>
+
+      <h3>Save sounds for training</h3>
+      <p class="muted">Keeps the last 8 seconds of microphone audio with your label, stored only in this browser
+        (nothing is uploaded). Download them as a .zip to train the next model. Avoid saving conversations.</p>
+      <div class="row">
+        <button id="save-gun" disabled>Save: it was a gunshot</button>
+        <button id="save-not" disabled>Save: not a gunshot</button>
+      </div>
+      <input id="save-note" class="note-input" type="text" maxlength="200"
+        placeholder="Note (optional), e.g. YouTube gunshot through phone speaker, 1 m">
+      <label class="check"><input type="checkbox" id="autosave"> Also save every detection automatically (labelled
+        “unreviewed”)</label>
+      <p id="save-msg" class="save-msg" role="status"></p>
+      <p id="saved-info" class="muted">No clips saved yet.</p>
+      <div id="saved-wrap" class="saved" hidden>
+        <table>
+          <thead><tr><th>Saved</th><th>Label</th><th>Peak</th><th>Note</th><th></th></tr></thead>
+          <tbody id="saved-list"></tbody>
+        </table>
+      </div>
+      <audio id="saved-audio" hidden></audio>
+      <div class="row">
+        <button id="save-download" disabled>Download all (.zip)</button>
+        <button id="save-clear" disabled>Delete all</button>
+      </div>
     </section>
 
     <section class="card" id="examples-section">
