@@ -175,6 +175,11 @@ microphone (raw: no noise suppression, no auto gain)
   ──► ONNX model in ONNX Runtime Web (WebAssembly) ──► P(gunshot), threshold 0.88
 ```
 
+On the page you can move the alarm line (threshold) to see the trade-off between missed gunshots and false
+alarms, and save the last 8 s of microphone audio with a label ("gunshot" / "not a gunshot", or automatically at
+every detection). Saved clips stay in the browser (IndexedDB) and download as a .zip of WAV files plus
+`labels.csv`, ready to use as training data for the next model.
+
 **It matches the Python pipeline numerically.** The JavaScript front-end is a port of
 [`features.py`](src/shotshield/features.py): STFT with a periodic Hann window, `center=True` with zero padding,
 librosa's own Slaney mel filterbank (exported as JSON), and `power_to_db(ref=max, top_db=80)`. Its output is
