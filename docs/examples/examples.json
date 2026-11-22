@@ -1,0 +1,159 @@
+{
+  "dataset": "UrbanSound8K (J. Salamon, C. Jacoby, J. P. Bello, 2014), CC BY-NC 3.0; clips originally from freesound.org",
+  "threshold": 0.2513888478279114,
+  "examples": [
+    {
+      "name": "gun_shot_157207_6-10-0",
+      "file": "examples/gun_shot_157207_6-10-0.wav",
+      "class": "gun_shot",
+      "is_gunshot": true,
+      "duration": 1.969,
+      "fold": 10,
+      "slice_file_name": "157207-6-10-0.wav",
+      "fsID": 157207,
+      "source": "https://freesound.org/s/157207/",
+      "note": null,
+      "keras_window_probs": [
+        0.999779
+      ],
+      "keras_max_prob": 0.999779,
+      "keras_detected": true
+    },
+    {
+      "name": "gun_shot_200460_6-4-0",
+      "file": "examples/gun_shot_200460_6-4-0.wav",
+      "class": "gun_shot",
+      "is_gunshot": true,
+      "duration": 0.857,
+      "fold": 10,
+      "slice_file_name": "200460-6-4-0.wav",
+      "fsID": 200460,
+      "source": "https://freesound.org/s/200460/",
+      "note": null,
+      "keras_window_probs": [
+        0.999634
+      ],
+      "keras_max_prob": 0.999634,
+      "keras_detected": true
+    },
+    {
+      "name": "dog_bark_209672_3-0-0",
+      "file": "examples/dog_bark_209672_3-0-0.wav",
+      "class": "dog_bark",
+      "is_gunshot": false,
+      "duration": 1.52,
+      "fold": 10,
+      "slice_file_name": "209672-3-0-0.wav",
+      "fsID": 209672,
+      "source": "https://freesound.org/s/209672/",
+      "note": null,
+      "keras_window_probs": [
+        0.002463
+      ],
+      "keras_max_prob": 0.002463,
+      "keras_detected": false
+    },
+    {
+      "name": "siren_74364_8-1-4",
+      "file": "examples/siren_74364_8-1-4.wav",
+      "class": "siren",
+      "is_gunshot": false,
+      "duration": 4.0,
+      "fold": 10,
+      "slice_file_name": "74364-8-1-4.wav",
+      "fsID": 74364,
+      "source": "https://freesound.org/s/74364/",
+      "note": null,
+      "keras_window_probs": [
+        1e-06
+      ],
+      "keras_max_prob": 1e-06,
+      "keras_detected": false
+    },
+    {
+      "name": "drilling_180127_4-0-3",
+      "file": "examples/drilling_180127_4-0-3.wav",
+      "class": "drilling",
+      "is_gunshot": false,
+      "duration": 4.0,
+      "fold": 10,
+      "slice_file_name": "180127-4-0-3.wav",
+      "fsID": 180127,
+      "source": "https://freesound.org/s/180127/",
+      "note": null,
+      "keras_window_probs": [
+        7.3e-05
+      ],
+      "keras_max_prob": 7.3e-05,
+      "keras_detected": false
+    },
+    {
+      "name": "jackhammer_162134_7-12-4",
+      "file": "examples/jackhammer_162134_7-12-4.wav",
+      "class": "jackhammer",
+      "is_gunshot": false,
+      "duration": 4.0,
+      "fold": 10,
+      "slice_file_name": "162134-7-12-4.wav",
+      "fsID": 162134,
+      "source": "https://freesound.org/s/162134/",
+      "note": null,
+      "keras_window_probs": [
+        8e-06
+      ],
+      "keras_max_prob": 8e-06,
+      "keras_detected": false
+    },
+    {
+      "name": "air_conditioner_189982_0-0-27",
+      "file": "examples/air_conditioner_189982_0-0-27.wav",
+      "class": "air_conditioner",
+      "is_gunshot": false,
+      "duration": 4.0,
+      "fold": 10,
+      "slice_file_name": "189982-0-0-27.wav",
+      "fsID": 189982,
+      "source": "https://freesound.org/s/189982/",
+      "note": null,
+      "keras_window_probs": [
+        0.003242
+      ],
+      "keras_max_prob": 0.003242,
+      "keras_detected": false
+    },
+    {
+      "name": "car_horn_100648_1-2-0",
+      "file": "examples/car_horn_100648_1-2-0.wav",
+      "class": "car_horn",
+      "is_gunshot": false,
+      "duration": 0.405,
+      "fold": 10,
+      "slice_file_name": "100648-1-2-0.wav",
+      "fsID": 100648,
+      "source": "https://freesound.org/s/100648/",
+      "note": null,
+      "keras_window_probs": [
+        1e-06
+      ],
+      "keras_max_prob": 1e-06,
+      "keras_detected": false
+    },
+    {
+      "name": "dog_bark_142641_3-0-0",
+      "file": "examples/dog_bark_142641_3-0-0.wav",
+      "class": "dog_bark",
+      "is_gunshot": false,
+      "duration": 0.38,
+      "fold": 10,
+      "slice_file_name": "142641-3-0-0.wav",
+      "fsID": 142641,
+      "source": "https://freesound.org/s/142641/",
+      "note": "the non-gunshot clip in test fold 10 the model scores highest",
+      "keras_window_probs": [
+        0.629034
+      ],
+      "keras_max_prob": 0.629034,
+      "keras_detected": true
+    }
+  ]
+}

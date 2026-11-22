@@ -11,6 +11,10 @@ data/
 *.mp3
 *.flac
 *.ogg
+# ...except the browser demo's example clips (UrbanSound8K test fold 10, CC BY-NC 3.0)
+!docs/examples/*.wav
+# Kaggle reference data for tools/verify_*.py (download it with the web bundle)
+tools/reference/
 
 # Python
 __pycache__/
