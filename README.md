@@ -7,9 +7,8 @@ fired. It was trained and evaluated on the 8,732 labelled clips of
 from nine other city sounds: sirens, drilling, jackhammers, car horns, dogs, engines, air conditioners,
 street music and children playing.
 
-<!-- TODO after training: add the live demo link, e.g.
-**[▶ Try the live demo](https://huggingface.co/spaces/<user>/shotshield)**
--->
+**[▶ Try the live demo](https://nishttw.github.io/ShotShield/)**: it listens to your microphone and runs the
+model in your browser. Your audio is never uploaded.
 
 ![Example spectrograms](assets/example_spectrograms.png)
 
@@ -113,6 +112,50 @@ python app.py
 `predict.py` prints whether a gunshot was found and when. `app.py` starts a web demo at
 http://127.0.0.1:7860 where you can upload or record audio.
 
+## Browser demo
+
+The [live demo](https://nishttw.github.io/ShotShield/) (in [`docs/`](docs), served by GitHub Pages) runs the
+same model without a server:
+
+```
+microphone (raw: no noise suppression, no auto gain)
+  ──► AudioWorklet ──► windowed-sinc resampler (48 / 44.1 kHz → 22,050 Hz)
+  ──► rolling 4 s buffer, every 1 s:
+  ──► log-mel spectrogram in JavaScript (docs/js/features.js)
+  ──► ONNX model in ONNX Runtime Web (WebAssembly) ──► P(gunshot), threshold 0.25
+```
+
+**It matches the Python pipeline numerically.** The JavaScript front-end is a port of
+[`features.py`](src/shotshield/features.py): STFT with a periodic Hann window, `center=True` with zero padding,
+librosa's own Slaney mel filterbank (exported as JSON), and `power_to_db(ref=max, top_db=80)`. Its output is
+checked against librosa, and the full browser path is checked against the Keras model:
+
+| Check | Script | Largest difference |
+|---|---|---|
+| JS log-mel vs librosa (noise, tones, clicks, loop padding, multi-window clips, silence) | `tools/verify_features.py` | ~1.2e-7 (float32 rounding, 0.00001 dB) |
+| ONNX vs Keras on the same features (19 windows, on Kaggle) | `notebooks/shotshield_v2_export_web.ipynb` | 1.8e-7 |
+| JS features → ONNX vs librosa → Keras, on synthetic signals and test-fold clips | `tools/verify_onnx.py` | 2.4e-7, same decision on every window |
+| The same, inside the browser (page → "Check this browser against Python") | `docs/js/app.js` | 8.7e-6 in Chrome (WebAssembly) |
+
+The model was converted to ONNX on Kaggle with
+[`notebooks/shotshield_v2_export_web.ipynb`](notebooks/shotshield_v2_export_web.ipynb). It downloads the
+v2.0 release, checks its SHA-256, tries several converters and keeps the first one that matches Keras on
+every reference window. To update the demo with a new bundle:
+
+```bash
+python tools/install_web_bundle.py shotshield_v2_web.zip
+```
+
+```bash
+python tools/verify_features.py --reference tools/reference/reference.npz
+```
+
+```bash
+python tools/verify_onnx.py
+```
+
+The verification scripts need Node.js and `pip install onnxruntime`.
+
 ## Retraining
 
 Open [`notebooks/shotshield_v2_training.ipynb`](notebooks/shotshield_v2_training.ipynb) on Kaggle, add the
@@ -122,8 +165,11 @@ trains the final model and packages everything into `shotshield_v2_outputs.zip`.
 ## Repository layout
 
 ```
+├── docs/                              browser demo (GitHub Pages): page, JS front-end, ONNX model, example clips
+├── tools/                             export the mel filterbank, install the web bundle, verification scripts
 ├── notebooks/
 │   ├── shotshield_v2_training.ipynb   training + evaluation (Kaggle)
+│   ├── shotshield_v2_export_web.ipynb Keras → ONNX conversion + reference data (Kaggle)
 │   └── v1_original.ipynb              first version, kept for comparison
 ├── src/shotshield/
 │   ├── features.py                    audio → log-mel spectrogram (same settings as training)
