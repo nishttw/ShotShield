@@ -170,7 +170,7 @@ same model without a server:
 ```
 microphone (raw: no noise suppression, no auto gain)
   ──► AudioWorklet ──► windowed-sinc resampler (48 / 44.1 kHz → 22,050 Hz)
-  ──► rolling 4 s buffer, every 1 s:
+  ──► rolling 4 s buffer, every 0.25 s:
   ──► log-mel spectrogram in JavaScript (docs/js/features.js)
   ──► ONNX model in ONNX Runtime Web (WebAssembly) ──► P(gunshot), threshold 0.88
 ```

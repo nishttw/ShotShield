@@ -42,7 +42,7 @@
         <input type="range" id="threshold" min="0.05" max="0.99" step="0.01" value="0.88" disabled>
         <button id="threshold-reset" class="small" disabled>Reset</button>
       </div>
-      <p class="hint">Probability that the last 4 seconds contain a gunshot, updated every second. Anything above the
+      <p class="hint">Probability that the last 4 seconds contain a gunshot, updated 4 times a second. Anything above the
         alarm line counts as a detection. The tuned line (<span id="tuned-label">88%</span>, chosen on test recordings)
         keeps false alarms rare but misses more gunshots. Move it lower to catch more, and watch what else starts to
         trigger.</p>
@@ -55,7 +55,7 @@
         </figure>
         <figure>
           <canvas id="history"></canvas>
-          <figcaption>Last 60 predictions; dashed line = threshold.</figcaption>
+          <figcaption>Predictions over the last 60 s; dashed line = alarm line.</figcaption>
         </figure>
       </div>
 
@@ -119,7 +119,7 @@
       <h2>How it works</h2>
       <ol class="steps">
         <li>The microphone is read raw (no noise suppression or auto gain) and resampled to 22,050 Hz.</li>
-        <li>Every second, the last 4 s become a 128 × 173 log-mel spectrogram, computed in JavaScript. It is a port of
+        <li>Every 0.25 s, the last 4 s become a 128 × 173 log-mel spectrogram, computed in JavaScript. It is a port of
           the Python training code and was checked against librosa: the largest difference is about 1e-7, which is
           float32 rounding.</li>
         <li>A convolutional network (304,289 parameters, converted from Keras to ONNX) runs on it with
