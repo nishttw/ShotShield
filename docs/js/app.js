@@ -29,7 +29,8 @@ function predict(features) {
 }
 
 async function fetchJSON(url) {
-  const r = await fetch(url);
+  // always revalidate: model_info.json names the model file, so a stale copy would point at an old model
+  const r = await fetch(url, { cache: 'no-cache' });
   if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
   return r.json();
 }
