@@ -20,7 +20,7 @@ from shotshield import ShotShieldDetector  # noqa: E402
 from shotshield.features import load_audio  # noqa: E402
 
 MAX_SECONDS = 120  # keep the demo responsive
-detector = ShotShieldDetector.load(ROOT / "models" / "shotshield_v2.keras", ROOT / "models" / "model_info.json")
+detector = ShotShieldDetector.load(ROOT / "models" / "shotshield_v3.keras", ROOT / "models" / "model_info.json")
 cfg = detector.cfg
 
 
