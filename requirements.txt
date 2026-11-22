@@ -1,0 +1,9 @@
+# Running the model (predict.py, app.py)
+tensorflow>=2.16   # includes Keras 3; the released model was saved with TensorFlow 2.21 / Keras 3.13
+librosa>=0.10
+soundfile>=0.12
+numpy>=1.26
+matplotlib>=3.8
+gradio>=5.0        # only needed for app.py
+
+# Training (notebooks/) also uses: pandas, scikit-learn, joblib — all preinstalled on Kaggle

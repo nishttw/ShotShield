@@ -1,0 +1,30 @@
+# Model files are published on the Releases page, not in git
+models/*
+!models/README.md
+*.h5
+*.keras
+*.zip
+
+# Audio / datasets
+data/
+*.wav
+*.mp3
+*.flac
+*.ogg
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Gradio
+.gradio/
+flagged/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

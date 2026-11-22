@@ -1,0 +1,4 @@
+* text=auto
+*.png binary
+*.keras binary
+*.ipynb text eol=lf
