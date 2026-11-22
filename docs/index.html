@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShotShield Live</title>
+  <meta name="description" content="Gunshot detection that runs in your browser: a CNN listens to your microphone and flags gunshots in real time.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>ShotShield <span>live</span></h1>
+      <p>A neural network that listens for gunshots. It runs entirely in your browser:
+        <b>your audio is never uploaded</b>.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="live">
+      <div class="row">
+        <button id="start" class="primary" disabled>Start listening</button>
+        <button id="stop" disabled>Stop</button>
+        <div class="levelbox" title="Microphone level"><div id="level"></div></div>
+      </div>
+      <p id="status" class="status" role="status">Loading the model…</p>
+
+      <div id="alert" class="alert" aria-live="assertive">
+        <strong>No gunshot</strong><span>in the last 4 s</span>
+      </div>
+
+      <div class="meter-row">
+        <div class="meter" aria-label="Gunshot probability">
+          <div id="meter-fill"></div>
+          <div id="meter-threshold" class="threshold" title="Decision threshold"></div>
+        </div>
+        <div id="prob" class="prob">–</div>
+      </div>
+      <p class="hint">Probability that the last 4 seconds contain a gunshot, updated every second.
+        Above <b id="threshold-label">25%</b> (the threshold tuned on validation data) counts as a detection.</p>
+
+      <div class="grid2">
+        <figure>
+          <canvas id="spec" width="173" height="128"></canvas>
+          <figcaption>What the model sees: log-mel spectrogram of the last 4 s
+            (128 bands, low frequencies at the bottom). <span id="fill"></span></figcaption>
+        </figure>
+        <figure>
+          <canvas id="history"></canvas>
+          <figcaption>Last 60 predictions; dashed line = threshold.</figcaption>
+        </figure>
+      </div>
+
+      <h3>Detections</h3>
+      <p id="events-empty" class="muted">None yet.</p>
+      <ol id="events" class="events"></ol>
+    </section>
+
+    <section class="card" id="examples-section">
+      <h2>Try a recording</h2>
+      <p class="muted">Clips from UrbanSound8K's test fold 10, which the model never saw in training. They were picked
+        at random, except the last one: the non-gunshot the model finds most gunshot-like. Click one to play and analyse it.</p>
+      <div id="examples" class="examples"></div>
+      <label class="upload">or analyse your own file <input type="file" id="file" accept="audio/*" disabled></label>
+
+      <div id="clip-result" class="clip" hidden>
+        <h3 id="clip-title"></h3>
+        <audio id="clip-audio" controls></audio>
+        <p id="clip-verdict" class="verdict"></p>
+        <div class="grid2">
+          <figure>
+            <canvas id="clip-spec" width="173" height="128"></canvas>
+            <figcaption>Spectrogram of the highest-scoring 4 s window.</figcaption>
+          </figure>
+          <figure>
+            <div id="clip-windows" class="windows"></div>
+            <figcaption>Probability for each 4 s window (1 s apart).</figcaption>
+          </figure>
+        </div>
+        <p id="clip-ref" class="muted"></p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>The microphone is read raw (no noise suppression or auto gain) and resampled to 22,050 Hz.</li>
+        <li>Every second, the last 4 s become a 128 × 173 log-mel spectrogram, computed in JavaScript. It is a port of
+          the Python training code and was checked against librosa: the largest difference is about 1e-7, which is
+          float32 rounding.</li>
+        <li>A convolutional network (304,289 parameters, converted from Keras to ONNX) runs on it with
+          <a href="https://onnxruntime.ai/">ONNX Runtime Web</a> and outputs P(gunshot).</li>
+      </ol>
+      <p>Trained on <a href="https://urbansounddataset.weebly.com/urbansound8k.html">UrbanSound8K</a>: gunshots against
+        nine other city sounds. 10-fold cross-validation F1 0.88 ± 0.09. Details, code and error analysis are on
+        <a href="https://github.com/nishttw/ShotShield">GitHub</a>.</p>
+      <details>
+        <summary>Check this browser against Python</summary>
+        <p class="muted">Runs every example clip here and compares the result with the probabilities the original
+          Keras model produced in Python.</p>
+        <button id="selftest" disabled>Run the check</button>
+        <div id="selftest-out"></div>
+      </details>
+    </section>
+
+    <section class="card note">
+      <h2>Limitations</h2>
+      <ul>
+        <li><b>Research demo, not a safety system.</b> Don't rely on it to detect real gunfire.</li>
+        <li>It was trained on 374 gunshot clips. Fireworks, door slams and other sharp bangs were not in the training
+          data and will often fool it, and so can steady machine noise.</li>
+        <li>A laptop or phone microphone, a speaker or room echo changes the sound. Expect more mistakes than in the
+          published results.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Example audio: UrbanSound8K by J. Salamon, C. Jacoby and J. P. Bello (CC BY-NC 3.0), originally from
+      <a href="https://freesound.org">freesound.org</a>. The model is for non-commercial use.
+      Code: MIT · <a href="https://github.com/nishttw/ShotShield">github.com/nishttw/ShotShield</a></p>
+  </footer>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
