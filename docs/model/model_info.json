@@ -1,0 +1,153 @@
+{
+  "name": "ShotShield",
+  "version": "2.0",
+  "created": "2026-11-19T18:54:41+00:00",
+  "task": "binary: does a 4 s audio window contain a gunshot?",
+  "labels": {
+    "0": "not_gunshot",
+    "1": "gun_shot"
+  },
+  "threshold": 0.2513888478279114,
+  "features": {
+    "sample_rate": 22050,
+    "clip_seconds": 4.0,
+    "n_mels": 128,
+    "n_fft": 2048,
+    "hop_length": 512,
+    "top_db": 80.0,
+    "n_frames": 173,
+    "padding": "loop"
+  },
+  "input_shape": [
+    128,
+    173,
+    1
+  ],
+  "parameters": 304289,
+  "training": {
+    "dataset": "UrbanSound8K",
+    "train_folds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "val_fold": 9,
+    "test_fold": 10,
+    "epochs_run": 17,
+    "class_weighting": "balanced"
+  },
+  "test_fold_10": {
+    "threshold_0.5": {
+      "threshold": 0.5,
+      "precision": 0.967741935483871,
+      "recall": 0.9375,
+      "f1": 0.9523809523809523,
+      "roc_auc": 0.9998447204968943,
+      "pr_auc": 0.996267825311943,
+      "accuracy": 0.996415770609319
+    },
+    "tuned_threshold": {
+      "threshold": 0.2513888478279114,
+      "precision": 0.9411764705882353,
+      "recall": 1.0,
+      "f1": 0.9696969696969697,
+      "roc_auc": 0.9998447204968943,
+      "pr_auc": 0.996267825311943,
+      "accuracy": 0.997610513739546
+    }
+  },
+  "cross_validation": {
+    "precision": {
+      "mean": 0.8920798571887234,
+      "std": 0.14306148540290772
+    },
+    "recall": {
+      "mean": 0.8965903993545451,
+      "std": 0.12821728402732635
+    },
+    "f1": {
+      "mean": 0.879695354248528,
+      "std": 0.08855126512415092
+    },
+    "roc_auc": {
+      "mean": 0.9888637316109191,
+      "std": 0.032627307706343436
+    },
+    "pr_auc": {
+      "mean": 0.9655710751439772,
+      "std": 0.08600813912855347
+    },
+    "accuracy": {
+      "mean": 0.9891328944238952,
+      "std": 0.008984753412611471
+    }
+  },
+  "versions": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "librosa": "0.11.0"
+  },
+  "model_sha256": "be0518e6fe1a52776bae6d2b9bab3c9fd9ec5f18381a0825d2a5e6033278b68e",
+  "web": {
+    "onnx_file": "shotshield_v2.onnx",
+    "onnx_sha256": "3658da16ec422ad682a7aa4b04737ab84ca7e7ad108a9a834005015ed8e05a53",
+    "converter": "tf2onnx",
+    "input_name": "log_mel",
+    "input_shape": "['unk__63', 128, 173, 1]",
+    "opset": 17,
+    "max_abs_diff_vs_keras": 1.7881393432617188e-07,
+    "checked_windows": 19,
+    "attempts": [
+      {
+        "strategy": "keras_tf",
+        "seconds": 8,
+        "error": [
+          "ValueError: The model provided has never called. It must be called at least once before export."
+        ]
+      },
+      {
+        "strategy": "tf2onnx",
+        "seconds": 8,
+        "max_abs_diff": 1.7881393432617188e-07,
+        "same_decision": "19/19",
+        "input": "log_mel",
+        "input_shape": "['unk__63', 128, 173, 1]",
+        "opset": 17,
+        "ops": [
+          "Add",
+          "Concat",
+          "Conv",
+          "GlobalAveragePool",
+          "GlobalMaxPool",
+          "MatMul",
+          "MaxPool",
+          "Relu",
+          "Reshape",
+          "Sigmoid",
+          "Squeeze"
+        ]
+      },
+      {
+        "strategy": "keras_torch",
+        "seconds": 13,
+        "error": [
+          "ValueError: The model provided has never called. It must be called at least once before export."
+        ]
+      }
+    ],
+    "versions": {
+      "tensorflow": "2.21.0",
+      "keras": "3.13.2",
+      "librosa": "0.11.0",
+      "numpy": "2.1.3",
+      "onnx": "1.23.2",
+      "onnxruntime": "1.32.0"
+    },
+    "created": "2026-11-19T20:02:10+00:00"
+  }
+}
