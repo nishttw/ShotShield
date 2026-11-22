@@ -37,6 +37,28 @@ only 4.3% of the clips, so a model that never predicts "gunshot" would already s
 
 ![Final model training and test results](assets/final_model.png)
 
+### What it gets wrong
+
+**False alarms by class** (cross-validation, threshold 0.5): of the 52 false alarms, the largest groups are
+air conditioners (19), drilling (8) and idling engines (8). Children playing and dog barks have 5 each, sirens 3,
+street music and jackhammers 2 each, and car horns none. Steady machine noise with sharp clicks or onsets is the
+main weakness. Adding more hard negatives of this kind is the clearest way to improve.
+
+**Shortcut check:** most gunshot clips are short, so a model could learn "short clip ⇒ gunshot".
+
+| Clip length | Non-gunshot clips | False-alarm rate | Gunshot recall |
+|---|---|---|---|
+| < 1 s | 364 | 1.6% | 0.88 |
+| 1–2 s | 357 | 1.4% | 0.89 |
+| 2–3 s | 203 | 1.0% | 0.89 |
+| 3–4 s | 116 | 1.7% | 0.83 |
+| 4 s (full) | 7,318 | 0.5% | **0.94** |
+
+Gunshot recall doesn't drop for long clips; it's actually highest for full 4 s clips. So the model is
+not detecting gunshots by clip length. Short *non*-gunshot clips do trigger false alarms about 3× more often
+than full-length ones (1–1.7% vs 0.5%). This is a small but real side effect of loop padding: repeating a
+short clip can create a train of sharp onsets that resembles gunfire.
+
 ## How it works
 
 ```
@@ -72,13 +94,13 @@ accuracy. A closer look showed it wasn't measuring what I thought it was:
 ## Quick start
 
 ```bash
-git clone https://github.com/<your-username>/ShotShield.git
+git clone https://github.com/nishttw/ShotShield.git
 cd ShotShield
 pip install -r requirements.txt
 ```
 
 Download `shotshield_v2.keras` and `model_info.json` from the
-[Releases page](../../releases) into `models/`. Then:
+[Releases page](https://github.com/nishttw/ShotShield/releases) into `models/`. Then:
 
 ```bash
 python predict.py path/to/recording.wav
