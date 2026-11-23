@@ -1,6 +1,6 @@
 {
-  "description": "UrbanSound8K test fold 10 (CC BY-NC 3.0) and FSD50K eval set (per-clip Creative Commons licenses); clips originally from freesound.org",
-  "threshold": 0.8788650631904602,
+  "description": "UrbanSound8K test fold 10 (CC BY-NC 3.0), FSD50K eval set (per-clip Creative Commons licenses), C3GD, multi-firearm and M16/firecracker test sets (CC BY 4.0)",
+  "threshold": 0.8,
   "examples": [
     {
       "name": "gun_shot_157207-6-10-0",
@@ -10,14 +10,14 @@
       "duration": 1.969,
       "dataset": "us8k",
       "slice_file_name": "157207-6-10-0.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 157207,
       "source": "https://freesound.org/s/157207/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        0.996683
+        0.999997
       ],
-      "keras_max_prob": 0.996683,
+      "keras_max_prob": 0.999997,
       "keras_detected": true
     },
     {
@@ -28,14 +28,14 @@
       "duration": 0.857,
       "dataset": "us8k",
       "slice_file_name": "200460-6-4-0.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 200460,
       "source": "https://freesound.org/s/200460/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        0.999541
+        0.968756
       ],
-      "keras_max_prob": 0.999541,
+      "keras_max_prob": 0.968756,
       "keras_detected": true
     },
     {
@@ -46,14 +46,14 @@
       "duration": 1.52,
       "dataset": "us8k",
       "slice_file_name": "209672-3-0-0.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 209672,
       "source": "https://freesound.org/s/209672/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        3e-06
+        0.005366
       ],
-      "keras_max_prob": 3e-06,
+      "keras_max_prob": 0.005366,
       "keras_detected": false
     },
     {
@@ -64,14 +64,14 @@
       "duration": 4.0,
       "dataset": "us8k",
       "slice_file_name": "74364-8-1-4.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 74364,
       "source": "https://freesound.org/s/74364/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        0.001365
+        0.002572
       ],
-      "keras_max_prob": 0.001365,
+      "keras_max_prob": 0.002572,
       "keras_detected": false
     },
     {
@@ -82,14 +82,14 @@
       "duration": 4.0,
       "dataset": "us8k",
       "slice_file_name": "180127-4-0-3.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 180127,
       "source": "https://freesound.org/s/180127/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        2.7e-05
+        0.001067
       ],
-      "keras_max_prob": 2.7e-05,
+      "keras_max_prob": 0.001067,
       "keras_detected": false
     },
     {
@@ -100,14 +100,14 @@
       "duration": 4.0,
       "dataset": "us8k",
       "slice_file_name": "162134-7-12-4.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 162134,
       "source": "https://freesound.org/s/162134/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        0.52524
+        0.012212
       ],
-      "keras_max_prob": 0.52524,
+      "keras_max_prob": 0.012212,
       "keras_detected": false
     },
     {
@@ -118,14 +118,14 @@
       "duration": 4.0,
       "dataset": "us8k",
       "slice_file_name": "189982-0-0-27.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 189982,
       "source": "https://freesound.org/s/189982/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        0.00793
+        0.001461
       ],
-      "keras_max_prob": 0.00793,
+      "keras_max_prob": 0.001461,
       "keras_detected": false
     },
     {
@@ -133,17 +133,17 @@
       "file": "examples/car_horn_100648-1-2-0.wav",
       "class": "car_horn",
       "is_gunshot": false,
-      "duration": 0.405,
+      "duration": 0.385,
       "dataset": "us8k",
       "slice_file_name": "100648-1-2-0.wav",
+      "note": null,
+      "fold": 10,
       "fsID": 100648,
       "source": "https://freesound.org/s/100648/",
-      "fold": 10,
-      "note": null,
       "keras_window_probs": [
-        0.029146
+        8.2e-05
       ],
-      "keras_max_prob": 0.029146,
+      "keras_max_prob": 8.2e-05,
       "keras_detected": false
     },
     {
@@ -151,22 +151,22 @@
       "file": "examples/Finger_snapping_387082.wav",
       "class": "finger_snapping",
       "is_gunshot": false,
-      "duration": 1.038,
+      "duration": 0.853,
       "dataset": "fsd50k",
       "slice_file_name": "387082.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 387082,
       "source": "https://freesound.org/s/387082/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "Finger snap (recording)",
         "uploader": "TKhelkar",
         "license": "http://creativecommons.org/publicdomain/zero/1.0/"
       },
       "keras_window_probs": [
-        0.543262
+        0.732609
       ],
-      "keras_max_prob": 0.543262,
+      "keras_max_prob": 0.732609,
       "keras_detected": false
     },
     {
@@ -177,20 +177,20 @@
       "duration": 4.011,
       "dataset": "fsd50k",
       "slice_file_name": "391282.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 391282,
       "source": "https://freesound.org/s/391282/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "Claping",
         "uploader": "Igor1998",
         "license": "http://creativecommons.org/publicdomain/zero/1.0/"
       },
       "keras_window_probs": [
-        0.716854,
-        0.792932
+        0.094349,
+        0.050614
       ],
-      "keras_max_prob": 0.792932,
+      "keras_max_prob": 0.094349,
       "keras_detected": false
     },
     {
@@ -198,22 +198,22 @@
       "file": "examples/Knock_430844.wav",
       "class": "knock",
       "is_gunshot": false,
-      "duration": 2.56,
+      "duration": 2.063,
       "dataset": "fsd50k",
       "slice_file_name": "430844.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 430844,
       "source": "https://freesound.org/s/430844/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "PROF. VIKTOR - GRUPO 2 - BATENDO NA PORTA.wav",
         "uploader": "GrupoViktor",
         "license": "http://creativecommons.org/publicdomain/zero/1.0/"
       },
       "keras_window_probs": [
-        0.002148
+        3.8e-05
       ],
-      "keras_max_prob": 0.002148,
+      "keras_max_prob": 3.8e-05,
       "keras_detected": false
     },
     {
@@ -221,22 +221,22 @@
       "file": "examples/Slam_330395.wav",
       "class": "slam",
       "is_gunshot": false,
-      "duration": 1.375,
+      "duration": 1.024,
       "dataset": "fsd50k",
       "slice_file_name": "330395.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 330395,
       "source": "https://freesound.org/s/330395/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "Wooden Entrance Door Close Slam",
         "uploader": "dav0r",
         "license": "http://creativecommons.org/publicdomain/zero/1.0/"
       },
       "keras_window_probs": [
-        0.455327
+        0.106425
       ],
-      "keras_max_prob": 0.455327,
+      "keras_max_prob": 0.106425,
       "keras_detected": false
     },
     {
@@ -247,21 +247,21 @@
       "duration": 5.942,
       "dataset": "fsd50k",
       "slice_file_name": "38957.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 38957,
       "source": "https://freesound.org/s/38957/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "spoon in cup.wav",
         "uploader": "Wolfsinger",
         "license": "http://creativecommons.org/licenses/by/3.0/"
       },
       "keras_window_probs": [
-        8e-06,
-        1e-06,
-        6e-06
+        0.000344,
+        0.001054,
+        0.001238
       ],
-      "keras_max_prob": 8e-06,
+      "keras_max_prob": 0.001238,
       "keras_detected": false
     },
     {
@@ -272,19 +272,19 @@
       "duration": 3.629,
       "dataset": "fsd50k",
       "slice_file_name": "411014.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 411014,
       "source": "https://freesound.org/s/411014/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "keyboard typing.mp3",
         "uploader": "krismar1230",
         "license": "http://creativecommons.org/publicdomain/zero/1.0/"
       },
       "keras_window_probs": [
-        0.025505
+        0.000882
       ],
-      "keras_max_prob": 0.025505,
+      "keras_max_prob": 0.000882,
       "keras_detected": false
     },
     {
@@ -292,24 +292,24 @@
       "file": "examples/Fireworks_132900.wav",
       "class": "fireworks",
       "is_gunshot": false,
-      "duration": 5.433,
+      "duration": 5.43,
       "dataset": "fsd50k",
       "slice_file_name": "132900.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 132900,
       "source": "https://freesound.org/s/132900/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "Fireworks.mp3",
         "uploader": "Alvinwhatup2",
         "license": "http://creativecommons.org/publicdomain/zero/1.0/"
       },
       "keras_window_probs": [
-        0.77911,
-        0.915074,
-        0.910829
+        0.691528,
+        0.670624,
+        0.810792
       ],
-      "keras_max_prob": 0.915074,
+      "keras_max_prob": 0.810792,
       "keras_detected": true
     },
     {
@@ -320,20 +320,111 @@
       "duration": 4.342,
       "dataset": "fsd50k",
       "slice_file_name": "174919.wav",
+      "note": "FSD50K eval set (never trained on)",
+      "fold": null,
       "fsID": 174919,
       "source": "https://freesound.org/s/174919/",
-      "fold": null,
-      "note": "FSD50K eval set (never trained on)",
       "credit": {
         "title": "fan sound",
         "uploader": "ibm5155",
         "license": "http://creativecommons.org/licenses/by/3.0/"
       },
       "keras_window_probs": [
-        0.003179,
-        0.00612
+        0.004481,
+        0.008482
       ],
-      "keras_max_prob": 0.00612,
+      "keras_max_prob": 0.008482,
+      "keras_detected": false
+    },
+    {
+      "name": "c3gd-20-Ga_9-ny_gravel_pit-nef_pardner_20ga-JON-fY2",
+      "file": "examples/c3gd-20-Ga_9-ny_gravel_pit-nef_pardner_20ga-JON-fY2.wav",
+      "class": "20 ga",
+      "is_gunshot": true,
+      "duration": 0.459,
+      "dataset": "c3gd",
+      "slice_file_name": "9-ny_gravel_pit-nef_pardner_20ga-JON-fY2gP5HEw_jo-5.wav",
+      "note": "c3gd test set (never trained on)",
+      "fold": null,
+      "source": "https://doi.org/10.48550/arXiv.2606.18135",
+      "credit": {
+        "title": "9-ny_gravel_pit-nef_pardner_20ga-JON-fY2gP5HEw_jo-5.wav",
+        "uploader": "C3GD dataset",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "keras_window_probs": [
+        0.723036
+      ],
+      "keras_max_prob": 0.723036,
+      "keras_detected": false
+    },
+    {
+      "name": "c3gd-.223-Remington_1-ny_gravel_pit-savage_223-ALICE-zNHc_ef",
+      "file": "examples/c3gd-.223-Remington_1-ny_gravel_pit-savage_223-ALICE-zNHc_ef.wav",
+      "class": ".223 remington",
+      "is_gunshot": true,
+      "duration": 0.459,
+      "dataset": "c3gd",
+      "slice_file_name": "1-ny_gravel_pit-savage_223-ALICE-zNHc_efQT_kF-13.wav",
+      "note": "c3gd test set (never trained on)",
+      "fold": null,
+      "source": "https://doi.org/10.48550/arXiv.2606.18135",
+      "credit": {
+        "title": "1-ny_gravel_pit-savage_223-ALICE-zNHc_efQT_kF-13.wav",
+        "uploader": "C3GD dataset",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "keras_window_probs": [
+        0.999186
+      ],
+      "keras_max_prob": 0.999186,
+      "keras_detected": true
+    },
+    {
+      "name": "mf-ruger_ar_556_dot223_caliber_30d8d636-e9e3-4407-b5b0-2b5a616d141a_v1",
+      "file": "examples/mf-ruger_ar_556_dot223_caliber_30d8d636-e9e3-4407-b5b0-2b5a616d141a_v1.wav",
+      "class": "ruger_ar_556_dot223_caliber",
+      "is_gunshot": true,
+      "duration": 4.63,
+      "dataset": "multi_firearm",
+      "slice_file_name": "30d8d636-e9e3-4407-b5b0-2b5a616d141a_v1.wav",
+      "note": "multi_firearm test set (never trained on)",
+      "fold": null,
+      "source": "https://doi.org/10.5281/zenodo.7004819",
+      "credit": {
+        "title": "30d8d636-e9e3-4407-b5b0-2b5a616d141a_v1.wav",
+        "uploader": "Multi-firearm dataset",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "keras_window_probs": [
+        0.994174,
+        0.992534
+      ],
+      "keras_max_prob": 0.994174,
+      "keras_detected": true
+    },
+    {
+      "name": "firecracker_180-90",
+      "file": "examples/firecracker_180-90.wav",
+      "class": "firecracker",
+      "is_gunshot": false,
+      "duration": 6.0,
+      "dataset": "m16",
+      "slice_file_name": "180-90.wav#3",
+      "note": "m16 test set (never trained on)",
+      "fold": null,
+      "source": "https://doi.org/10.17632/kbgw323248.1",
+      "credit": {
+        "title": "180-90.wav#3",
+        "uploader": "M16 rifle gunshots and firecrackers dataset",
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      "keras_window_probs": [
+        0.000734,
+        0.084223,
+        0.040177
+      ],
+      "keras_max_prob": 0.084223,
       "keras_detected": false
     }
   ]

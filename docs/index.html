@@ -38,12 +38,12 @@
         <div id="prob" class="prob">–</div>
       </div>
       <div class="sens">
-        <label for="threshold">Alarm line <b id="threshold-label">88%</b> <span id="threshold-mode" class="muted"></span></label>
-        <input type="range" id="threshold" min="0.05" max="0.99" step="0.01" value="0.88" disabled>
+        <label for="threshold">Alarm line <b id="threshold-label">80%</b> <span id="threshold-mode" class="muted"></span></label>
+        <input type="range" id="threshold" min="0.05" max="0.99" step="0.01" value="0.80" disabled>
         <button id="threshold-reset" class="small" disabled>Reset</button>
       </div>
       <p class="hint">Probability that the last 4 seconds contain a gunshot, updated 4 times a second. Anything above the
-        alarm line counts as a detection. The tuned line (<span id="tuned-label">88%</span>, chosen on test recordings)
+        alarm line counts as a detection. The tuned line (<span id="tuned-label">80%</span>, chosen on test recordings)
         keeps false alarms rare but misses more gunshots. Move it lower to catch more, and watch what else starts to
         trigger.</p>
 
@@ -125,12 +125,14 @@
         <li>A convolutional network (304,289 parameters, converted from Keras to ONNX) runs on it with
           <a href="https://onnxruntime.ai/">ONNX Runtime Web</a> and outputs P(gunshot).</li>
       </ol>
-      <p>Model v3 learned from 803 gunshots and about 18,800 other sounds (part of them held back for testing) from
-        <a href="https://urbansounddataset.weebly.com/urbansound8k.html">UrbanSound8K</a>,
-        <a href="https://github.com/karolpiczak/ESC-50">ESC-50</a> and <a href="https://zenodo.org/records/4060432">FSD50K</a>,
-        including finger snaps, claps, knocks, door slams, typing and fans. On 2,729 test sounds it never saw, it raises
-        false alarms on 2.6% (the previous version: 21.7%). Details, code and error analysis are on
-        <a href="https://github.com/nishttw/ShotShield">GitHub</a>.</p>
+      <p>Model v4 learned from about 15,300 gunshots and 23,200 other sounds (part of them held back for testing).
+        Besides <a href="https://urbansounddataset.weebly.com/urbansound8k.html">UrbanSound8K</a>,
+        <a href="https://github.com/karolpiczak/ESC-50">ESC-50</a> and <a href="https://zenodo.org/records/4060432">FSD50K</a>
+        (finger snaps, claps, knocks, door slams, typing, fans…), it uses real gunshots from many guns, distances and
+        microphones, including phones (C3GD, a multi-firearm set, Belize, M16), and firecrackers. Half of the training
+        copies were also passed through a simulated loudspeaker, room and laptop microphone. On test recordings it never
+        saw, it catches 91% of the gunshots (v3: 44%) with false alarms on 1.3% of the other sounds (v3: 1.7%).
+        Details, code and error analysis are on <a href="https://github.com/nishttw/ShotShield">GitHub</a>.</p>
       <details>
         <summary>Check this browser against Python</summary>
         <p class="muted">Runs every example clip here and compares the result with the probabilities the original
@@ -144,11 +146,11 @@
       <h2>Limitations</h2>
       <ul>
         <li><b>Research demo, not a safety system.</b> Don't rely on it to detect real gunfire.</li>
-        <li><b>Fireworks and explosions still fool it</b> (about 1 in 3 test clips), and so can hammering. They really
-          are acoustically close to gunfire.</li>
-        <li>It misses about 40% of gunshots from recordings unlike its training data. Gunshots recorded with other guns,
-          at other distances or on other equipment are harder.</li>
-        <li>A laptop or phone microphone, a speaker or room echo changes the sound. Expect more mistakes than in the
+        <li><b>Fireworks still fool it</b> (14 of 37 test clips). They really are acoustically close to gunfire.</li>
+        <li>It still misses about 60% of the gunshots in FSD50K, a mix of very different recordings: gunshots unlike its
+          training data remain hard.</li>
+        <li><b>Gunshots played through a laptop speaker are still hard:</b> in a test with 27 YouTube gunshots it caught
+          10 (v3: 13), even though it does much better on simulated speaker playback. Expect more mistakes than in the
           published results.</li>
       </ul>
     </section>
@@ -157,7 +159,8 @@
   <footer class="wrap">
     <p>Example audio: UrbanSound8K by J. Salamon, C. Jacoby and J. P. Bello (CC BY-NC 3.0) and FSD50K by E. Fonseca
       et al. (per-clip Creative Commons licenses, credited with each clip), originally from
-      <a href="https://freesound.org">freesound.org</a>. The model is for non-commercial use.
+      <a href="https://freesound.org">freesound.org</a>; C3GD (S. Gurny and R. Quinn), the multi-firearm set
+      (R. Kabealo et al.) and the M16/firecracker set (Mendeley Data), all CC BY 4.0. The model is for non-commercial use.
       Code: MIT · <a href="https://github.com/nishttw/ShotShield">github.com/nishttw/ShotShield</a></p>
   </footer>
 
