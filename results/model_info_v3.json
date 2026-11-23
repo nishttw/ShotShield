@@ -1,0 +1,226 @@
+{
+  "name": "ShotShield",
+  "version": "3.0",
+  "created": "2026-11-20T01:37:45+00:00",
+  "task": "binary: does a 4 s audio window contain a gunshot?",
+  "labels": {
+    "0": "not_gunshot",
+    "1": "gun_shot"
+  },
+  "threshold": 0.8788650631904602,
+  "features": {
+    "sample_rate": 22050,
+    "clip_seconds": 4.0,
+    "n_mels": 128,
+    "n_fft": 2048,
+    "hop_length": 512,
+    "top_db": 80.0,
+    "n_frames": 173,
+    "padding": "loop"
+  },
+  "input_shape": [
+    128,
+    173,
+    1
+  ],
+  "parameters": 304289,
+  "training": {
+    "datasets": {
+      "UrbanSound8K": "folds 1-8 train, 9 validation, 10 test",
+      "ESC-50": "folds 1-3 train, 4 validation, 5 test",
+      "FSD50K": "dev train / dev val / eval test; all gunshot clips + capped hard-negative classes"
+    },
+    "clips": {
+      "esc50/test": {
+        "other": 386,
+        "gunshot": 0
+      },
+      "esc50/train": {
+        "other": 1133,
+        "gunshot": 0
+      },
+      "esc50/val": {
+        "other": 375,
+        "gunshot": 0
+      },
+      "fsd50k/test": {
+        "other": 2343,
+        "gunshot": 119
+      },
+      "fsd50k/train": {
+        "other": 5397,
+        "gunshot": 262
+      },
+      "fsd50k/val": {
+        "other": 853,
+        "gunshot": 48
+      },
+      "us8k/us8k": {
+        "other": 8358,
+        "gunshot": 374
+      }
+    },
+    "deduplication": "ESC-50/FSD50K clips whose Freesound ID is in UrbanSound8K removed; FSD50K vs ESC-50 too",
+    "windows": "digital silence trimmed; loop-padded if < 4 s, else the loudest 4 s",
+    "augmentation": "one copy per training clip: reverb, mic EQ, ESC-50 background 0-20 dB SNR, noise, soft clipping",
+    "fsd_selection": {
+      "cap": {
+        "dev": 80,
+        "eval": 30
+      },
+      "other": {
+        "dev": 800,
+        "eval": 300
+      },
+      "impulsive": [
+        "Finger_snapping",
+        "Clapping",
+        "Slam",
+        "Knock",
+        "Door",
+        "Sliding_door",
+        "Drawer_open_or_close",
+        "Cupboard_open_or_close",
+        "Dishes_and_pots_and_pans",
+        "Cutlery_and_silverware",
+        "Chink_and_clink",
+        "Glass",
+        "Shatter",
+        "Crack",
+        "Thump_and_thud",
+        "Tap",
+        "Hammer",
+        "Wood",
+        "Tick",
+        "Coin_(dropping)",
+        "Keys_jangling",
+        "Computer_keyboard",
+        "Typing",
+        "Typewriter",
+        "Camera",
+        "Scissors",
+        "Ratchet_and_pawl",
+        "Fireworks",
+        "Boom",
+        "Explosion",
+        "Thunder",
+        "Snare_drum",
+        "Bass_drum",
+        "Drum",
+        "Hi-hat",
+        "Cymbal",
+        "Tabla",
+        "Writing",
+        "Packing_tape_and_duct_tape",
+        "Tearing",
+        "Crumpling_and_crinkling",
+        "Crushing",
+        "Zipper_(clothing)",
+        "Walk_and_footsteps",
+        "Squeak",
+        "Mechanisms",
+        "Tools",
+        "Power_tool",
+        "Drill",
+        "Sawing",
+        "Engine_starting",
+        "Cough",
+        "Sneeze",
+        "Splash_and_splatter"
+      ],
+      "machine": [
+        "Mechanical_fan",
+        "Microwave_oven",
+        "Printer",
+        "Engine",
+        "Idling",
+        "Accelerating_and_revving_and_vroom",
+        "Motorcycle",
+        "Car_passing_by",
+        "Truck",
+        "Traffic_noise_and_roadway_noise",
+        "Buzz",
+        "Hiss",
+        "Boiling",
+        "Frying_(food)",
+        "Water_tap_and_faucet",
+        "Toilet_flush",
+        "Rain",
+        "Wind",
+        "Rail_transport",
+        "Aircraft"
+      ]
+    },
+    "epochs_run": 25,
+    "class_weighting": "balanced"
+  },
+  "test_fold_10": {
+    "threshold_0.5": {
+      "threshold": 0.5,
+      "precision": 0.5925925925925926,
+      "recall": 1.0,
+      "f1": 0.7441860465116279,
+      "roc_auc": 0.999805900621118,
+      "pr_auc": 0.9949491504133381,
+      "accuracy": 0.973715651135006
+    },
+    "tuned_threshold": {
+      "threshold": 0.8788650631904602,
+      "precision": 0.9411764705882353,
+      "recall": 1.0,
+      "f1": 0.9696969696969697,
+      "roc_auc": 0.999805900621118,
+      "pr_auc": 0.9949491504133381,
+      "accuracy": 0.997610513739546
+    }
+  },
+  "hard_test": {
+    "description": "ESC-50 fold 5 + FSD50K eval (never trained on)",
+    "other_sounds": 2729,
+    "gunshots": 119,
+    "v3": {
+      "hard_neg_false_alarm_rate": 0.02601685599120557,
+      "fsd_gunshot_recall": 0.5966386554621849
+    },
+    "v2": {
+      "hard_neg_false_alarm_rate": 0.21656284353242947,
+      "fsd_gunshot_recall": 0.680672268907563
+    }
+  },
+  "cross_validation": {
+    "precision": {
+      "mean": 0.7727323752930715,
+      "std": 0.2576959240859845
+    },
+    "recall": {
+      "mean": 0.9686500257997936,
+      "std": 0.06208735735896993
+    },
+    "f1": {
+      "mean": 0.8308833913790732,
+      "std": 0.18535389880240338
+    },
+    "roc_auc": {
+      "mean": 0.998030562974891,
+      "std": 0.003602682330062758
+    },
+    "pr_auc": {
+      "mean": 0.9739194151388226,
+      "std": 0.04505352620227921
+    },
+    "hard_neg_false_alarm_rate": {
+      "mean": 0.10461707585196042,
+      "std": 0.09151907187697954
+    },
+    "fsd_gunshot_recall": {
+      "mean": 0.7025210084033614,
+      "std": 0.10586604886847892
+    }
+  },
+  "versions": {
+    "tensorflow": "2.21.0",
+    "keras": "3.13.2",
+    "librosa": "0.11.0"
+  },
+  "model_sha256": "ab22249c1aee1f716557e75f85857ef8eccc58302b952c5149bb3086abd065e3"
+}

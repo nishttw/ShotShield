@@ -1,0 +1,37 @@
+test set,model,threshold,gunshots,gunshots caught,other sounds,false alarms
+us8k,v3,0.879,32,27,805,2
+us8k,v4 notebook threshold,0.639,32,29,805,5
+us8k,v4 shipped,0.8,32,27,805,1
+esc50,v3,0.879,0,,386,1
+esc50,v4 notebook threshold,0.639,0,,386,8
+esc50,v4 shipped,0.8,0,,386,5
+fsd50k,v3,0.879,119,54,2365,57
+fsd50k,v4 notebook threshold,0.639,119,57,2365,71
+fsd50k,v4 shipped,0.8,119,45,2365,47
+c3gd,v3,0.879,1990,932,0,
+c3gd,v4 notebook threshold,0.639,1990,1932,0,
+c3gd,v4 shipped,0.8,1990,1885,0,
+multi_firearm,v3,0.879,342,52,0,
+multi_firearm,v4 notebook threshold,0.639,342,322,0,
+multi_firearm,v4 shipped,0.8,342,317,0,
+belize,v3,0.879,150,67,600,1
+belize,v4 notebook threshold,0.639,150,138,600,5
+belize,v4 shipped,0.8,150,127,600,2
+m16,v3,0.879,75,57,129,6
+m16,v4 notebook threshold,0.639,75,73,129,3
+m16,v4 shipped,0.8,75,72,129,1
+sesa,v3,0.879,21,17,84,7
+sesa,v4 notebook threshold,0.639,21,18,84,4
+sesa,v4 shipped,0.8,21,18,84,1
+simulated playback,v3,0.879,1500,376,1496,21
+simulated playback,v4 notebook threshold,0.639,1500,1301,1496,85
+simulated playback,v4 shipped,0.8,1500,1179,1496,43
+hard negatives (ESC-50 + FSD50K),v3,0.879,0,,2751,58
+hard negatives (ESC-50 + FSD50K),v4 notebook threshold,0.639,0,,2751,79
+hard negatives (ESC-50 + FSD50K),v4 shipped,0.8,0,,2751,52
+firecrackers,v3,0.879,0,,129,6
+firecrackers,v4 notebook threshold,0.639,0,,129,3
+firecrackers,v4 shipped,0.8,0,,129,1
+all clean test sets,v3,0.879,2729,1206,4369,74
+all clean test sets,v4 notebook threshold,0.639,2729,2569,4369,96
+all clean test sets,v4 shipped,0.8,2729,2491,4369,57

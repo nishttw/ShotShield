@@ -1,0 +1,25 @@
+test set,model,gunshots caught,false alarms
+us8k,v4 (threshold 0.64),90.6%,0.6%
+us8k,v4 + BGG (threshold 0.64),96.9%,0.1%
+esc50,v4 (threshold 0.64),,2.1%
+esc50,v4 + BGG (threshold 0.64),,2.1%
+fsd50k,v4 (threshold 0.64),47.9%,3.0%
+fsd50k,v4 + BGG (threshold 0.64),57.1%,5.4%
+c3gd,v4 (threshold 0.64),97.1%,
+c3gd,v4 + BGG (threshold 0.64),92.9%,
+multi_firearm,v4 (threshold 0.64),94.2%,
+multi_firearm,v4 + BGG (threshold 0.64),95.3%,
+belize,v4 (threshold 0.64),92.0%,0.8%
+belize,v4 + BGG (threshold 0.64),88.0%,1.7%
+m16,v4 (threshold 0.64),97.3%,2.3%
+m16,v4 + BGG (threshold 0.64),98.7%,2.3%
+sesa,v4 (threshold 0.64),85.7%,4.8%
+sesa,v4 + BGG (threshold 0.64),90.5%,7.1%
+simulated playback,v4 (threshold 0.64),86.7%,5.7%
+simulated playback,v4 + BGG (threshold 0.64),81.1%,7.2%
+hard negatives (ESC-50 + FSD50K),v4 (threshold 0.64),,2.9%
+hard negatives (ESC-50 + FSD50K),v4 + BGG (threshold 0.64),,4.9%
+firecrackers,v4 (threshold 0.64),,2.3%
+firecrackers,v4 + BGG (threshold 0.64),,2.3%
+BGG game sounds (held back),v4 (threshold 0.64),74.2%,42.9%
+BGG game sounds (held back),v4 + BGG (threshold 0.64),97.6%,42.9%

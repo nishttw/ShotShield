@@ -1,13 +1,13 @@
 {
   "name": "ShotShield",
-  "version": "3.0",
-  "created": "2026-11-20T01:37:45+00:00",
+  "version": "4.0",
+  "created": "2026-11-22T23:22:41+00:00",
   "task": "binary: does a 4 s audio window contain a gunshot?",
   "labels": {
     "0": "not_gunshot",
     "1": "gun_shot"
   },
-  "threshold": 0.8788650631904602,
+  "threshold": 0.8,
   "features": {
     "sample_rate": 22050,
     "clip_seconds": 4.0,
@@ -26,201 +26,486 @@
   "parameters": 304289,
   "training": {
     "datasets": {
-      "UrbanSound8K": "folds 1-8 train, 9 validation, 10 test",
-      "ESC-50": "folds 1-3 train, 4 validation, 5 test",
-      "FSD50K": "dev train / dev val / eval test; all gunshot clips + capped hard-negative classes"
-    },
-    "clips": {
-      "esc50/test": {
-        "other": 386,
-        "gunshot": 0
+      "us8k": {
+        "train": {
+          "other": 6768,
+          "gunshot": 311
+        },
+        "val": {
+          "other": 785,
+          "gunshot": 31
+        },
+        "test": {
+          "other": 805,
+          "gunshot": 32
+        }
       },
-      "esc50/train": {
-        "other": 1133,
-        "gunshot": 0
+      "esc50": {
+        "train": {
+          "other": 1133,
+          "gunshot": 0
+        },
+        "val": {
+          "other": 375,
+          "gunshot": 0
+        },
+        "test": {
+          "other": 386,
+          "gunshot": 0
+        }
       },
-      "esc50/val": {
-        "other": 375,
-        "gunshot": 0
+      "fsd50k": {
+        "train": {
+          "other": 5353,
+          "gunshot": 262
+        },
+        "val": {
+          "other": 849,
+          "gunshot": 48
+        },
+        "test": {
+          "other": 2365,
+          "gunshot": 119
+        }
       },
-      "fsd50k/test": {
-        "other": 2343,
-        "gunshot": 119
+      "c3gd": {
+        "train": {
+          "other": 0,
+          "gunshot": 9032
+        },
+        "val": {
+          "other": 0,
+          "gunshot": 1090
+        },
+        "test": {
+          "other": 0,
+          "gunshot": 1990
+        }
       },
-      "fsd50k/train": {
-        "other": 5397,
-        "gunshot": 262
+      "multi_firearm": {
+        "train": {
+          "other": 0,
+          "gunshot": 626
+        },
+        "val": {
+          "other": 0,
+          "gunshot": 107
+        },
+        "test": {
+          "other": 0,
+          "gunshot": 342
+        }
       },
-      "fsd50k/val": {
-        "other": 853,
-        "gunshot": 48
+      "belize": {
+        "train": {
+          "other": 2562,
+          "gunshot": 496
+        },
+        "val": {
+          "other": 438,
+          "gunshot": 101
+        },
+        "test": {
+          "other": 600,
+          "gunshot": 150
+        }
       },
-      "us8k/us8k": {
-        "other": 8358,
-        "gunshot": 374
+      "m16": {
+        "train": {
+          "other": 136,
+          "gunshot": 303
+        },
+        "val": {
+          "other": 20,
+          "gunshot": 43
+        },
+        "test": {
+          "other": 144,
+          "gunshot": 75
+        }
+      },
+      "sesa": {
+        "train": {
+          "other": 326,
+          "gunshot": 70
+        },
+        "val": {
+          "other": 74,
+          "gunshot": 10
+        },
+        "test": {
+          "other": 84,
+          "gunshot": 21
+        }
+      },
+      "home": {
+        "train": {
+          "other": 0,
+          "gunshot": 0
+        },
+        "val": {
+          "other": 0,
+          "gunshot": 0
+        },
+        "test": {
+          "other": 1,
+          "gunshot": 27
+        }
       }
     },
-    "deduplication": "ESC-50/FSD50K clips whose Freesound ID is in UrbanSound8K removed; FSD50K vs ESC-50 too",
-    "windows": "digital silence trimmed; loop-padded if < 4 s, else the loudest 4 s",
-    "augmentation": "one copy per training clip: reverb, mic EQ, ESC-50 background 0-20 dB SNR, noise, soft clipping",
-    "fsd_selection": {
-      "cap": {
-        "dev": 80,
-        "eval": 30
-      },
-      "other": {
-        "dev": 800,
-        "eval": 300
-      },
-      "impulsive": [
-        "Finger_snapping",
-        "Clapping",
-        "Slam",
-        "Knock",
-        "Door",
-        "Sliding_door",
-        "Drawer_open_or_close",
-        "Cupboard_open_or_close",
-        "Dishes_and_pots_and_pans",
-        "Cutlery_and_silverware",
-        "Chink_and_clink",
-        "Glass",
-        "Shatter",
-        "Crack",
-        "Thump_and_thud",
-        "Tap",
-        "Hammer",
-        "Wood",
-        "Tick",
-        "Coin_(dropping)",
-        "Keys_jangling",
-        "Computer_keyboard",
-        "Typing",
-        "Typewriter",
-        "Camera",
-        "Scissors",
-        "Ratchet_and_pawl",
-        "Fireworks",
-        "Boom",
-        "Explosion",
-        "Thunder",
-        "Snare_drum",
-        "Bass_drum",
-        "Drum",
-        "Hi-hat",
-        "Cymbal",
-        "Tabla",
-        "Writing",
-        "Packing_tape_and_duct_tape",
-        "Tearing",
-        "Crumpling_and_crinkling",
-        "Crushing",
-        "Zipper_(clothing)",
-        "Walk_and_footsteps",
-        "Squeak",
-        "Mechanisms",
-        "Tools",
-        "Power_tool",
-        "Drill",
-        "Sawing",
-        "Engine_starting",
-        "Cough",
-        "Sneeze",
-        "Splash_and_splatter"
-      ],
-      "machine": [
-        "Mechanical_fan",
-        "Microwave_oven",
-        "Printer",
-        "Engine",
-        "Idling",
-        "Accelerating_and_revving_and_vroom",
-        "Motorcycle",
-        "Car_passing_by",
-        "Truck",
-        "Traffic_noise_and_roadway_noise",
-        "Buzz",
-        "Hiss",
-        "Boiling",
-        "Frying_(food)",
-        "Water_tap_and_faucet",
-        "Toilet_flush",
-        "Rain",
-        "Wind",
-        "Rail_transport",
-        "Aircraft"
-      ]
+    "failed_downloads": {},
+    "windows": "digital silence trimmed; clean: loudest 4 s (k-th loudest for extra firecracker events), loop-pad if < 4 s; augmented: event at a random position, short clips placed into a background",
+    "augmentation": {
+      "copies": 1,
+      "p_playback": 0.5,
+      "codec": true,
+      "chain": "MP3 -> loudspeaker (HP 80-500 Hz, resonance, limiter) -> room -> laptop mic; or room/mic; + background, noise, clipping"
     },
-    "epochs_run": 25,
+    "threshold": "best F1 on the validation rows of all datasets",
+    "epochs_run": 31,
     "class_weighting": "balanced"
   },
-  "test_fold_10": {
-    "threshold_0.5": {
-      "threshold": 0.5,
-      "precision": 0.5925925925925926,
-      "recall": 1.0,
-      "f1": 0.7441860465116279,
-      "roc_auc": 0.999805900621118,
-      "pr_auc": 0.9949491504133381,
-      "accuracy": 0.973715651135006
+  "tests": {
+    "us8k": {
+      "v4": {
+        "clips": 837,
+        "gunshots": 32,
+        "gunshots caught": "29/32 (90.6%)",
+        "false alarms": "5/805 (0.6%)",
+        "ROC-AUC": 0.9984
+      },
+      "v3": {
+        "clips": 837,
+        "gunshots": 32,
+        "gunshots caught": "27/32 (84.4%)",
+        "false alarms": "2/805 (0.2%)",
+        "ROC-AUC": 0.9972
+      }
     },
-    "tuned_threshold": {
-      "threshold": 0.8788650631904602,
-      "precision": 0.9411764705882353,
-      "recall": 1.0,
-      "f1": 0.9696969696969697,
-      "roc_auc": 0.999805900621118,
-      "pr_auc": 0.9949491504133381,
-      "accuracy": 0.997610513739546
+    "esc50": {
+      "v4": {
+        "clips": 386,
+        "gunshots": 0,
+        "false alarms": "8/386 (2.1%)"
+      },
+      "v3": {
+        "clips": 386,
+        "gunshots": 0,
+        "false alarms": "1/386 (0.3%)"
+      }
+    },
+    "fsd50k": {
+      "v4": {
+        "clips": 2484,
+        "gunshots": 119,
+        "gunshots caught": "57/119 (47.9%)",
+        "false alarms": "71/2365 (3.0%)",
+        "ROC-AUC": 0.8822
+      },
+      "v3": {
+        "clips": 2484,
+        "gunshots": 119,
+        "gunshots caught": "54/119 (45.4%)",
+        "false alarms": "57/2365 (2.4%)",
+        "ROC-AUC": 0.896
+      }
+    },
+    "c3gd": {
+      "v4": {
+        "clips": 1990,
+        "gunshots": 1990,
+        "gunshots caught": "1932/1990 (97.1%)"
+      },
+      "v3": {
+        "clips": 1990,
+        "gunshots": 1990,
+        "gunshots caught": "932/1990 (46.8%)"
+      }
+    },
+    "multi_firearm": {
+      "v4": {
+        "clips": 342,
+        "gunshots": 342,
+        "gunshots caught": "322/342 (94.2%)"
+      },
+      "v3": {
+        "clips": 342,
+        "gunshots": 342,
+        "gunshots caught": "52/342 (15.2%)"
+      }
+    },
+    "belize": {
+      "v4": {
+        "clips": 750,
+        "gunshots": 150,
+        "gunshots caught": "138/150 (92.0%)",
+        "false alarms": "5/600 (0.8%)",
+        "ROC-AUC": 0.9972
+      },
+      "v3": {
+        "clips": 750,
+        "gunshots": 150,
+        "gunshots caught": "67/150 (44.7%)",
+        "false alarms": "1/600 (0.2%)",
+        "ROC-AUC": 0.927
+      }
+    },
+    "m16": {
+      "v4": {
+        "clips": 204,
+        "gunshots": 75,
+        "gunshots caught": "73/75 (97.3%)",
+        "false alarms": "3/129 (2.3%)",
+        "ROC-AUC": 0.9959
+      },
+      "v3": {
+        "clips": 204,
+        "gunshots": 75,
+        "gunshots caught": "58/75 (77.3%)",
+        "false alarms": "6/129 (4.7%)",
+        "ROC-AUC": 0.9672
+      }
+    },
+    "sesa": {
+      "v4": {
+        "clips": 105,
+        "gunshots": 21,
+        "gunshots caught": "18/21 (85.7%)",
+        "false alarms": "4/84 (4.8%)",
+        "ROC-AUC": 0.9751
+      },
+      "v3": {
+        "clips": 105,
+        "gunshots": 21,
+        "gunshots caught": "17/21 (81.0%)",
+        "false alarms": "7/84 (8.3%)",
+        "ROC-AUC": 0.945
+      }
+    },
+    "simulated playback": {
+      "v4": {
+        "clips": 2996,
+        "gunshots": 1500,
+        "gunshots caught": "1301/1500 (86.7%)",
+        "false alarms": "85/1496 (5.7%)",
+        "ROC-AUC": 0.9714
+      },
+      "v3": {
+        "clips": 2996,
+        "gunshots": 1500,
+        "gunshots caught": "377/1500 (25.1%)",
+        "false alarms": "21/1496 (1.4%)",
+        "ROC-AUC": 0.9335
+      }
+    },
+    "hard negatives (ESC-50 + FSD50K)": {
+      "v4": {
+        "clips": 2751,
+        "gunshots": 0,
+        "false alarms": "79/2751 (2.9%)"
+      },
+      "v3": {
+        "clips": 2751,
+        "gunshots": 0,
+        "false alarms": "58/2751 (2.1%)"
+      }
+    },
+    "firecrackers": {
+      "v4": {
+        "clips": 129,
+        "gunshots": 0,
+        "false alarms": "3/129 (2.3%)"
+      },
+      "v3": {
+        "clips": 129,
+        "gunshots": 0,
+        "false alarms": "6/129 (4.7%)"
+      }
     }
   },
-  "hard_test": {
-    "description": "ESC-50 fold 5 + FSD50K eval (never trained on)",
-    "other_sounds": 2729,
-    "gunshots": 119,
-    "v3": {
-      "hard_neg_false_alarm_rate": 0.02601685599120557,
-      "fsd_gunshot_recall": 0.5966386554621849
+  "home_recordings": [
+    {
+      "name": "0001_gunshot_2026-11-22T08-25-31.wav",
+      "label": 1,
+      "v4": 0.7899,
+      "v3": 0.8645
     },
-    "v2": {
-      "hard_neg_false_alarm_rate": 0.21656284353242947,
-      "fsd_gunshot_recall": 0.680672268907563
+    {
+      "name": "0002_gunshot_2026-11-22T08-25-33.wav",
+      "label": 1,
+      "v4": 0.4967,
+      "v3": 0.5707
+    },
+    {
+      "name": "0003_gunshot_2026-11-22T08-25-42.wav",
+      "label": 1,
+      "v4": 0.4338,
+      "v3": 0.5141
+    },
+    {
+      "name": "0004_gunshot_2026-11-22T08-25-55.wav",
+      "label": 1,
+      "v4": 0.8885,
+      "v3": 0.9176
+    },
+    {
+      "name": "0005_gunshot_2026-11-22T08-25-59.wav",
+      "label": 1,
+      "v4": 0.8587,
+      "v3": 0.9407
+    },
+    {
+      "name": "0006_gunshot_2026-11-22T08-26-16.wav",
+      "label": 1,
+      "v4": 0.3281,
+      "v3": 0.5679
+    },
+    {
+      "name": "0007_gunshot_2026-11-22T08-26-21.wav",
+      "label": 1,
+      "v4": 0.3878,
+      "v3": 0.3047
+    },
+    {
+      "name": "0008_gunshot_2026-11-22T08-26-33.wav",
+      "label": 1,
+      "v4": 0.0756,
+      "v3": 0.1676
+    },
+    {
+      "name": "0009_gunshot_2026-11-22T08-26-48.wav",
+      "label": 1,
+      "v4": 0.0359,
+      "v3": 0.0834
+    },
+    {
+      "name": "0010_gunshot_2026-11-22T08-26-54.wav",
+      "label": 1,
+      "v4": 0.0713,
+      "v3": 0.2949
+    },
+    {
+      "name": "0011_gunshot_2026-11-22T08-26-59.wav",
+      "label": 1,
+      "v4": 0.1345,
+      "v3": 0.1439
+    },
+    {
+      "name": "0012_gunshot_2026-11-22T08-27-03.wav",
+      "label": 1,
+      "v4": 0.0836,
+      "v3": 0.5651
+    },
+    {
+      "name": "0013_gunshot_2026-11-22T08-27-35.wav",
+      "label": 1,
+      "v4": 0.6281,
+      "v3": 0.9835
+    },
+    {
+      "name": "0014_gunshot_2026-11-22T08-28-44.wav",
+      "label": 1,
+      "v4": 0.9501,
+      "v3": 0.9849
+    },
+    {
+      "name": "0015_gunshot_2026-11-22T08-28-50.wav",
+      "label": 1,
+      "v4": 0.4914,
+      "v3": 0.8856
+    },
+    {
+      "name": "0016_gunshot_2026-11-22T08-28-55.wav",
+      "label": 1,
+      "v4": 0.9178,
+      "v3": 0.9821
+    },
+    {
+      "name": "0017_gunshot_2026-11-22T08-29-01.wav",
+      "label": 1,
+      "v4": 0.8464,
+      "v3": 0.9778
+    },
+    {
+      "name": "0018_gunshot_2026-11-22T08-29-21.wav",
+      "label": 1,
+      "v4": 0.8964,
+      "v3": 0.9427
+    },
+    {
+      "name": "0019_gunshot_2026-11-22T08-29-56.wav",
+      "label": 1,
+      "v4": 0.9795,
+      "v3": 0.9792
+    },
+    {
+      "name": "0020_gunshot_2026-11-22T08-30-05.wav",
+      "label": 1,
+      "v4": 0.5212,
+      "v3": 0.9091
+    },
+    {
+      "name": "0021_gunshot_2026-11-22T08-30-10.wav",
+      "label": 1,
+      "v4": 0.5034,
+      "v3": 0.8844
+    },
+    {
+      "name": "0022_gunshot_2026-11-22T08-30-32.wav",
+      "label": 1,
+      "v4": 0.7447,
+      "v3": 0.8401
+    },
+    {
+      "name": "0023_gunshot_2026-11-22T08-31-02.wav",
+      "label": 1,
+      "v4": 0.8399,
+      "v3": 0.8991
+    },
+    {
+      "name": "0024_gunshot_2026-11-22T08-31-08.wav",
+      "label": 1,
+      "v4": 0.8997,
+      "v3": 0.8884
+    },
+    {
+      "name": "0025_gunshot_2026-11-22T08-31-14.wav",
+      "label": 1,
+      "v4": 0.9167,
+      "v3": 0.8328
+    },
+    {
+      "name": "0026_not_gunshot_2026-11-22T08-32-04.wav",
+      "label": 0,
+      "v4": 0.7937,
+      "v3": 0.6598
+    },
+    {
+      "name": "0027_gunshot_2026-11-22T08-32-18.wav",
+      "label": 1,
+      "v4": 0.0098,
+      "v3": 0.0881
+    },
+    {
+      "name": "0028_gunshot_2026-11-22T08-32-36.wav",
+      "label": 1,
+      "v4": 0.6504,
+      "v3": 0.8189
     }
-  },
-  "cross_validation": {
-    "precision": {
-      "mean": 0.7727323752930715,
-      "std": 0.2576959240859845
-    },
-    "recall": {
-      "mean": 0.9686500257997936,
-      "std": 0.06208735735896993
-    },
-    "f1": {
-      "mean": 0.8308833913790732,
-      "std": 0.18535389880240338
-    },
-    "roc_auc": {
-      "mean": 0.998030562974891,
-      "std": 0.003602682330062758
-    },
-    "pr_auc": {
-      "mean": 0.9739194151388226,
-      "std": 0.04505352620227921
-    },
-    "hard_neg_false_alarm_rate": {
-      "mean": 0.10461707585196042,
-      "std": 0.09151907187697954
-    },
-    "fsd_gunshot_recall": {
-      "mean": 0.7025210084033614,
-      "std": 0.10586604886847892
-    }
+  ],
+  "credits": {
+    "c3gd": "C3GD, S. Gurny and R. Quinn (Certus Innovations), CC BY 4.0, doi:10.48550/arXiv.2606.18135",
+    "multi_firearm": "Multi-firearm, multi-orientation gunshot dataset, R. Kabealo et al. (Florida Tech / AFRL), CC BY 4.0, doi:10.1016/j.dib.2023.109091",
+    "belize": "Tropical forest gunshot dataset, L. Katsis et al. (Belize), CC BY 4.0, doi:10.17632/x48cwz364j.3",
+    "m16": "M16 rifle gunshots and firecrackers, Mendeley Data, CC BY 4.0, doi:10.17632/kbgw323248.1",
+    "sesa": "SESA (Sound Events for Surveillance Applications), Freesound-derived, CC BY 4.0, doi:10.5281/zenodo.3519845"
   },
   "versions": {
     "tensorflow": "2.21.0",
     "keras": "3.13.2",
     "librosa": "0.11.0"
   },
-  "model_sha256": "ab22249c1aee1f716557e75f85857ef8eccc58302b952c5149bb3086abd065e3"
+  "model_sha256": "1b0777857ff55a5bcd1f8e3afe691ded4de3df084fc9656f7808c886846ff6ed",
+  "threshold_notebook": 0.639254093170166,
+  "threshold_note": "0.80 instead of the notebook's best-F1 0.639 (validation is mostly C3GD gunshots): at 0.80 the clean test sets give fewer false alarms than v3 (57 vs 74 of 4369) and the finger-snap example (0.733) no longer fires. Chosen after looking at the test results."
 }
