@@ -18,7 +18,7 @@ from shotshield import ShotShieldDetector  # noqa: E402
 def main() -> int:
     parser = argparse.ArgumentParser(description="Detect gunshots in an audio file.")
     parser.add_argument("audio", help="audio file (wav, mp3, flac, ogg, ...)")
-    parser.add_argument("--model", default=ROOT / "models" / "shotshield_v3.keras")
+    parser.add_argument("--model", default=ROOT / "models" / "shotshield_v4.keras")
     parser.add_argument("--info", default=ROOT / "models" / "model_info.json")
     parser.add_argument("--hop", type=float, default=1.0, help="seconds between 4 s windows (default 1.0)")
     parser.add_argument("--json", action="store_true", help="print the full result as JSON")
