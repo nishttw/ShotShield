@@ -423,6 +423,8 @@ async function analyze(y) {
   return { features, starts, probs };
 }
 
+const DATASET_NAMES = { fsd50k: 'FSD50K', c3gd: 'C3GD', multi_firearm: 'multi-firearm set', m16: 'M16 set' };
+
 async function loadExamples() {
   let data;
   try {
@@ -437,7 +439,7 @@ async function loadExamples() {
     const b = document.createElement('button');
     b.className = 'example' + (ex.is_gunshot ? ' gun' : '');
     b.innerHTML = `<span class="tag">${ex.is_gunshot ? 'gunshot' : 'not a gunshot'}</span>
-      <b>${label(ex.class)}</b><small>${ex.duration.toFixed(1)} s${ex.dataset === 'fsd50k' ? ' · FSD50K'
+      <b>${label(ex.class)}</b><small>${ex.duration.toFixed(1)} s${DATASET_NAMES[ex.dataset] ? ` · ${DATASET_NAMES[ex.dataset]}`
         : ex.note ? ' · hardest negative' : ''}</small>`;
     b.title = ex.note ?? `UrbanSound8K ${ex.slice_file_name} (test fold ${ex.fold})`;
     b.onclick = () => runClip(`${capitalize(label(ex.class))} — ${ex.slice_file_name}`, ex.file, ex);
@@ -480,7 +482,7 @@ async function runClip(title, url, ex = null) {
         credit.append(a, ', ');
         const src = document.createElement('a');
         src.href = ex.source;
-        src.textContent = 'freesound.org';
+        src.textContent = new URL(ex.source).hostname; // freesound.org, doi.org, ...
         credit.append(src, ').');
         $('clip-ref').append(credit);
       }
